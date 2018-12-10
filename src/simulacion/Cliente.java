@@ -10,39 +10,41 @@ package simulacion;
  * @author Enmanuel
  */
 public class Cliente {
-    float tiempo_entre_llegada;
-    float probabilidad;
-    float costo_espera;
+    int tiempoEspera;
+    int tiempoServicio;
+    double probabilidad;
 
-    public Cliente(float tiempo_entre_llegada, float probabilidad, float costo_espera) {
-        this.tiempo_entre_llegada = tiempo_entre_llegada;
+    public Cliente(int tiempoEspera, int tiempoServicio, double probabilidad) {
+        this.tiempoEspera = tiempoEspera;
+        this.tiempoServicio = tiempoServicio;
         this.probabilidad = probabilidad;
-        this.costo_espera = costo_espera;
     }
 
-    public float getTiempo_entre_llegada() {
-        return tiempo_entre_llegada;
+    public int getTiempoEspera() {
+        return tiempoEspera;
     }
 
-    public void setTiempo_entre_llegada(float tiempo_entre_llegada) {
-        this.tiempo_entre_llegada = tiempo_entre_llegada;
+    public void setTiempoEspera(int tiempoEspera) {
+        this.tiempoEspera = tiempoEspera;
     }
 
-    public float getProbabilidad() {
+    public int getTiempoServicio() {
+        return tiempoServicio;
+    }
+
+    public void setTiempoServicio(int tiempoServicio) {
+        this.tiempoServicio = tiempoServicio;
+    }
+
+    public double getProbabilidad() {
         return probabilidad;
     }
 
-    public void setProbabilidad(float probabilidad) {
+    public void setProbabilidad(double probabilidad) {
         this.probabilidad = probabilidad;
     }
 
-    public float getCosto_espera() {
-        return costo_espera;
-    }
-
-    public void setCosto_espera(float costo_espera) {
-        this.costo_espera = costo_espera;
-    }
     
+
     
 }

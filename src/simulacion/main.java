@@ -19,14 +19,17 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {  
-        int cant_clientes;
-        int tiempo_simulacion;
-        int cant_servidores = 0;
-        boolean tabla_eventos;
-
+        int tiempoSimulacion;
+        int cantClientes;
+        int cantServidores = 0;
+        int tablaEventos;
+        int costoEspera = 0;
+        int cantValores;
+        int costoServidor = 0;
+        ArrayList<TiempoLlegada> tiemposLlegada = new ArrayList<TiempoLlegada>();
+        ArrayList<TiempoServicio> tiemposServicios = new ArrayList<TiempoServicio>();
         Scanner s = new Scanner(System.in);
-        ArrayList<Cliente> Clientes =new ArrayList<Cliente>();
-        ArrayList<Servidor> Servidores = new ArrayList<Servidor>();
+        
         System.out.println("1.- Segundos");
         System.out.println("2.- Minutos");
         System.out.println("3.- Horas");
@@ -35,50 +38,73 @@ public class main {
         System.out.println("6.- Meses");
         System.out.println("7.- Años");
         System.out.println("Seleccione la unidad de tiempo para la simulacion: ");
-        tiempo_simulacion = s.nextInt();
+        tiempoSimulacion = s.nextInt();
+       
         System.out.println("Clientes permitidos: ");
-        cant_clientes = s.nextInt();
+        cantClientes = s.nextInt();
         
-        for (int i = 0; i < cant_clientes; i++) {
-            int tiempo_llegada = 0;
+        System.out.println("Tiempo entre llegadas: Cantidad de valores");
+        cantValores = s.nextInt();
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < cantValores; i++) {
+            int valor = 0;
             float probabilidad = 0;
-            int costo_espera = 0;
-            System.out.println("Tiempo entre llegada del cliente "+i+": ");
-            tiempo_llegada = s.nextInt();
-            System.out.println("Probabilidad del cliente "+i+": ");
+            System.out.println("Introduce el valor del tiempo de llegada: "+i);
+            valor = s.nextInt();
+            System.out.println("Introduce la probabilidad del tiempo de llegada: "+i);
             probabilidad = s.nextFloat();
-            System.out.println("Costo de espera del cliente "+i+": ");
-            costo_espera = s.nextInt();
-            Cliente C = new Cliente(tiempo_llegada, probabilidad, costo_espera);
-            Clientes.add(C);
+            max += probabilidad*100;
+            TiempoLlegada tiempoLlegada = new TiempoLlegada(valor, probabilidad, min, max-1);
+            min +=probabilidad*100;
+            System.out.println(tiempoLlegada.getMin());
+            System.out.println(tiempoLlegada.getMax());
+            tiemposLlegada.add(tiempoLlegada);
         }
-        
+      
         System.out.println("Cantidad de servidores: ");
-        cant_servidores = s.nextInt();
+        cantServidores = s.nextInt();
         
-        for (int i = 0; i < cant_servidores; i++) {
-            int tiempo_llegada = 0;
+        System.out.println("Tiempos de servicio para cada servidor: Cantidad de valores");
+        cantValores = s.nextInt();
+        min = 0;
+        max = 0;
+        for (int i = 0; i < cantValores; i++) {
+            int valor = 0;
             float probabilidad = 0;
-            int costo = 0;
-            System.out.println("Tiempo de servicio del servidor "+i+": ");
-            tiempo_llegada = s.nextInt();
-            System.out.println("Probabilidad del servidor "+i+": ");
+            System.out.println("Introduce el valor del tiempo de servicio: "+i);
+            valor = s.nextInt();
+            System.out.println("Introduce la probabilidad del tiempo de servicio: "+i);
             probabilidad = s.nextFloat();
-            System.out.println("Costo del servidor "+i+": ");
-            costo = s.nextInt();
-            Servidor S = new Servidor(tiempo_llegada, probabilidad, costo);
-            Servidores.add(S);
+            max += probabilidad*100;
+            TiempoServicio tiempoServicio = new TiempoServicio(valor, probabilidad, min, max-1);
+            min +=probabilidad*100;
+            tiemposServicios.add(tiempoServicio);
         }
+     
+        System.out.println("Costo de cada servidor");
+        costoServidor = s.nextInt();
+            
+        System.out.println("Costo de espera de los clientes");
+        costoEspera = s.nextInt();
         
         System.out.println("¿Desea visualizar la tabla de eventos?");
-        tabla_eventos = s.nextBoolean();
+        System.out.println("1.- Si");
+        System.out.println("2.- No");
+        tablaEventos = s.nextInt();
         
-        Simulacion simulacion = new Simulacion(tiempo_simulacion,
-                cant_clientes,
-                cant_servidores,
-                tabla_eventos,
-                Clientes,
-                Servidores);
+        Simulacion simulacion = new Simulacion(
+            tiempoSimulacion,
+            cantClientes,
+            tiemposLlegada,
+            tiemposServicios,
+            costoServidor,
+            costoEspera,
+            tablaEventos,
+            cantServidores);
+        
+        simulacion.play();
+        
         
     }
     

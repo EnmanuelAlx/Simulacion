@@ -10,31 +10,11 @@ package simulacion;
  * @author Enmanuel
  */
 public class Servidor {
-    float tiempo_servicio;
-    float probabilidad;
     int costo;
     Cliente cliente;
-    
-    public Servidor(float tiempo_servicio, float probabilidad, int costo) {
-        this.tiempo_servicio = tiempo_servicio;
-        this.probabilidad = probabilidad;
+
+    public Servidor(int costo) {
         this.costo = costo;
-    }
-
-    public float getTiempo_servicio() {
-        return tiempo_servicio;
-    }
-
-    public void setTiempo_servicio(float tiempo_servicio) {
-        this.tiempo_servicio = tiempo_servicio;
-    }
-
-    public float getProbabilidad() {
-        return probabilidad;
-    }
-
-    public void setProbabilidad(float probabilidad) {
-        this.probabilidad = probabilidad;
     }
 
     public int getCosto() {
@@ -45,8 +25,13 @@ public class Servidor {
         this.costo = costo;
     }
 
-    public void setCliente(Cliente cliente){
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-   
+    
+    
 }
