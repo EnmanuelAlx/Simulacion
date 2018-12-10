@@ -26,6 +26,7 @@ public class main {
         int costoEspera = 0;
         int cantValores;
         int costoServidor = 0;
+        int tiempoTotal = 0;
         ArrayList<Tiempo> tiemposLlegada = new ArrayList<Tiempo>();
         ArrayList<Tiempo> tiemposServicios = new ArrayList<Tiempo>();
         Scanner s = new Scanner(System.in);
@@ -37,10 +38,13 @@ public class main {
         System.out.println("5.- Semanas");
         System.out.println("6.- Meses");
         System.out.println("7.- Años");
-        System.out.println("Seleccione la unidad de tiempo para la simulacion: ");
+        System.out.print("Seleccione la unidad de tiempo para la simulacion: ");
         tiempoSimulacion = s.nextInt();
        
-        System.out.println("Clientes permitidos: ");
+        System.out.print("Tiempo total de la simulacion: ");
+        tiempoTotal = s.nextInt();
+        
+        System.out.print("Clientes permitidos: ");
         cantClientes = s.nextInt();
         
 //        System.out.println("Tiempo entre llegadas: Cantidad de valores");
@@ -85,14 +89,18 @@ public class main {
 //            tiemposServicios.add(tiempoServicio);
 //        }
         
-        tiemposServicios.add(createTiempo(1, 0.3f, 0, 29));
-        tiemposServicios.add(createTiempo(2, 0.3f, 30, 59));
-        tiemposServicios.add(createTiempo(3, 0.4f, 60, 99));
+        tiemposServicios.add(createTiempo(1, 0.2f, 0, 19));
+        tiemposServicios.add(createTiempo(2, 0.2f, 20, 39));
+        tiemposServicios.add(createTiempo(3, 0.2f, 40, 59));
+        tiemposServicios.add(createTiempo(4, 0.2f, 60, 79));
+        tiemposServicios.add(createTiempo(5, 0.2f, 80, 99));
+
+                        
         
-        System.out.println("Costo de cada servidor");
+        System.out.print("Costo de cada servidor: ");
         costoServidor = s.nextInt();
             
-        System.out.println("Costo de espera de los clientes");
+        System.out.print("Costo de espera de los clientes: ");
         costoEspera = s.nextInt();
         
         System.out.println("¿Desea visualizar la tabla de eventos?");
@@ -108,7 +116,9 @@ public class main {
             costoServidor,
             costoEspera,
             tablaEventos,
-            cantServidores);
+            cantServidores,
+            false,
+            tiempoTotal);
         
         simulacion.play();
         

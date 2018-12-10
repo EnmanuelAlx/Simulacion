@@ -8,6 +8,8 @@ package simulacion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.LinkedList;
+import java.util.Queue;
 /**
  *
  * @author Enmanuel
@@ -15,138 +17,137 @@ import java.util.Random;
 public class Simulacion {
     
     private int tiempoSimulacion;
-    private int cantClientes;
+    private int tiempoTotalSimulacion;
+    private int cantMaxClientes;
     private ArrayList<Tiempo> tiemposLlegada;
     private ArrayList<Tiempo> tiempoServicios;
     private int costoServidor;
     private int costoEspera;
     private int tablaEventos;
-    private int tiempoLlegada = 0;
-    private int tiempoSalida = 999999;
-    private boolean serverOcupado = false;
+    
+    
+    private int tiempoLlegada;
+    private int tiempoSalida;
+    private boolean statusServer;
     private int tiempoModelo;
     private int cantidadServidores;
-    private int longitudCola = 0;
-    private boolean primera = true;
-    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-    private ArrayList<Integer> AT = new ArrayList<>();
-    private ArrayList<Integer> DT = new ArrayList<>();
-    private ArrayList<Integer> TM = new ArrayList<>();
-    private ArrayList<Integer> WL = new ArrayList<>();
-    private ArrayList<Boolean> SS = new ArrayList<>();
-    private ArrayList<String> tipo = new ArrayList<>();
-
-
-
+    private int longitudCola;
+    private boolean primera;
+    private Queue<Cliente> colaClientes;
+    private float SumCostoEspera;
+    private boolean esFinito;
+    private int TS;
+    private int TE;
+    
     
     public Simulacion(int tiempoSimulacion, int cantClientes, ArrayList<Tiempo> tiemposLlegada,
-                      ArrayList<Tiempo> tiempoServicios, int costoServidor, int costoEspera, int tablaEventos, int cantidadServidores) {
+                      ArrayList<Tiempo> tiempoServicios, int costoServidor, int costoEspera,
+                      int tablaEventos, int cantidadServidores, boolean esFinito, int tiempoTotal) {
         this.tiempoSimulacion = tiempoSimulacion;
-        this.cantClientes = cantClientes;
+        this.cantMaxClientes = cantClientes;
         this.tiemposLlegada = tiemposLlegada;
         this.tiempoServicios = tiempoServicios;
         this.costoServidor = costoServidor;
         this.costoEspera = costoEspera;
         this.tablaEventos = tablaEventos;
         this.cantidadServidores = cantidadServidores;
+        this.esFinito = esFinito;
+        this.tiempoTotalSimulacion = tiempoTotal;
+        this.tiempoLlegada = 0;
+        this.tiempoSalida = 9999999;
+        this.longitudCola = 0;
+        this.primera = true;
+        this.statusServer = false;
+        this.colaClientes = new LinkedList();
+        this.SumCostoEspera = 0;
     }
     
+   
     public void play(){
-        for (int i = 0; i < cantClientes; i++) {
-            Cliente cliente = generarCliente();
-            this.clientes.add(cliente);
+        for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
             if(this.tiempoLlegada<this.tiempoSalida){
-                llegadaCliente(cliente);
-            }else{
-                salidaCliente(cliente);
+                llegadaCliente();
             }
-            
-            System.out.println("------------------------------------------------------------------------------------");
+            else{
+                salidaCliente();
+            }
+            System.out.println("____________________________________________");
         }
-        
-        for(Cliente cliente: this.clientes){
-            System.out.println("------------------------------------------------------------------------------------");
-            System.out.println("Cliente.TE "+cliente.getTiempoEntrada());
-            System.out.println("Cliente.TS "+cliente.getTiempoServicio());
-            System.out.println("------------------------------------------------------------------------------------");
-
-        }
-        
     }
    
-    public void llegadaCliente(Cliente cliente){
-        System.out.println("LLEGADAAAAAAAAA");
-
-        this.tipo.add("Llegada");
-        this.tiempoModelo = this.tiempoLlegada;
-        System.out.println("TM "+ this.tiempoModelo);
-
-        this.TM.add(tiempoModelo);
-        if(this.serverOcupado){
-           this.longitudCola++;
-           addLongitudCola();
-           generarAT(cliente);
-        }else{
-           this.SS.add(serverOcupado);
-           this.serverOcupado = true;
-           generarAT(cliente);
-           generarDT(cliente);
-           addLongitudCola();
+    public void llegadaCliente(){
+        System.out.println("Llegadaaaaaaaaaaaaa");
+        if(this.esFinito && this.longitudCola>=this.cantMaxClientes){
+            incrementarCostoEspera();
+            return;
         }
-    }
-    
-    public void salidaCliente(Cliente cliente){
-        System.out.println("SALIDAAAAA");
-        this.tipo.add("Salida");
-        this.tiempoModelo = this.tiempoSalida;
-        System.out.println("TM "+ this.tiempoModelo);
-
-        this.TM.add(tiempoModelo);
-        
-        if(this.longitudCola==0){
-            this.serverOcupado = false;
-            this.tiempoSalida = 999999;
-            this.SS.add(false);
-            this.DT.add(this.tiempoSalida);
+        setTMtoAT();
+        if(!this.statusServer){
+            this.statusServer = true;
+            this.TS = generarTS();
+            this.incrementDT(this.TS);
         }
         else{
-            this.longitudCola--;
-            generarDT(cliente);
-            
+            Cliente cliente = new Cliente(this.TE, this.TS);
+            this.colaClientes.add(cliente);
         }
+        this.TE = generarTE();
+        this.incrementAT(this.TE);
+        System.out.println("TM: "+this.tiempoModelo+" SS: "+this.statusServer+" WL: "+this.colaClientes.size()+" AT: "+this.tiempoLlegada+" DT: "+this.tiempoSalida);
     }
     
-    public void generarAT(Cliente cliente){
-        this.tiempoLlegada = this.tiempoModelo + cliente.getTiempoEntrada();
-        System.out.println("AT "+ this.tiempoLlegada);
-        this.AT.add(this.tiempoLlegada);
-    }
-    
-    public void generarDT(Cliente cliente){
-        this.tiempoSalida = this.tiempoModelo + cliente.getTiempoServicio();
-        System.out.println("DT "+ this.tiempoSalida);
+    public void salidaCliente(){
+        System.out.println("Salidaaaaaaaaaaaaaa");
 
-        this.DT.add(this.tiempoSalida);
+        setTMtoDT();
+        if(!this.colaClientes.isEmpty()){
+            Cliente cliente = this.colaClientes.poll();
+            incrementDT(cliente.getTiempoServicio());
+        }
+        else{
+            this.statusServer = false;
+            this.tiempoSalida = 99999;
+        }
+        System.out.println("TM: "+this.tiempoModelo+" SS: "+this.statusServer+" WL: "+this.colaClientes.size()+" AT: "+this.tiempoLlegada+" DT: "+this.tiempoSalida);
+
     }
     
-    
-    public void addLongitudCola(){
-        this.WL.add(this.longitudCola);
-    }
-    
-    public Cliente generarCliente(){
+    public int generarTS(){
         Random rand = new Random();
-        int tiempoEntrada = getTiempo(rand.nextInt(100), this.tiemposLlegada);
-        int tiempoServicio = getTiempo(rand.nextInt(100), this.tiempoServicios);
-
-//        if(isPrimera()){
-//            tiempoEntrada = 0;
-//            setPrimera(false);
-//        }
-        Cliente cliente = new Cliente(tiempoEntrada, tiempoServicio);
+        return getTiempo(rand.nextInt(100), this.tiempoServicios);
+    }
+    
+    public int generarTE(){
+        Random rand = new Random();
+        return getTiempo(rand.nextInt(100), this.tiemposLlegada);
+    }
+    
+    public void incrementAT(int tiempoEntrada){
+        this.tiempoLlegada = this.tiempoModelo + tiempoEntrada;
+    }
+    
+    public void incrementDT(int tiempoServicio){
+        this.tiempoSalida = this.tiempoModelo + tiempoServicio;
+    }
+    
+    
+    public void setTMtoAT() {
+        this.tiempoModelo = this.tiempoLlegada;
+    }
+    
+    public void setTMtoDT(){
+        this.tiempoModelo = this.tiempoSalida;
+    }
+  
+    public Cliente generarCliente(int TE, int TS){
+        Cliente cliente = new Cliente(TE, TS);
         return cliente;
     }
-   
+  
+    private void incrementarCostoEspera(){
+        this.SumCostoEspera += this.costoEspera;
+    }
+    
     private int getTiempo(int RandomNum, ArrayList tiempos){
         for (Iterator<Tiempo> i = tiempos.iterator(); i.hasNext();) {
             Tiempo item = i.next();
