@@ -26,8 +26,8 @@ public class main {
         int costoEspera = 0;
         int cantValores;
         int costoServidor = 0;
-        ArrayList<TiempoLlegada> tiemposLlegada = new ArrayList<TiempoLlegada>();
-        ArrayList<TiempoServicio> tiemposServicios = new ArrayList<TiempoServicio>();
+        ArrayList<Tiempo> tiemposLlegada = new ArrayList<Tiempo>();
+        ArrayList<Tiempo> tiemposServicios = new ArrayList<Tiempo>();
         Scanner s = new Scanner(System.in);
         
         System.out.println("1.- Segundos");
@@ -43,45 +43,52 @@ public class main {
         System.out.println("Clientes permitidos: ");
         cantClientes = s.nextInt();
         
-        System.out.println("Tiempo entre llegadas: Cantidad de valores");
-        cantValores = s.nextInt();
-        int min = 0;
-        int max = 0;
-        for (int i = 0; i < cantValores; i++) {
-            int valor = 0;
-            float probabilidad = 0;
-            System.out.println("Introduce el valor del tiempo de llegada: "+i);
-            valor = s.nextInt();
-            System.out.println("Introduce la probabilidad del tiempo de llegada: "+i);
-            probabilidad = s.nextFloat();
-            max += probabilidad*100;
-            TiempoLlegada tiempoLlegada = new TiempoLlegada(valor, probabilidad, min, max-1);
-            min +=probabilidad*100;
-            System.out.println(tiempoLlegada.getMin());
-            System.out.println(tiempoLlegada.getMax());
-            tiemposLlegada.add(tiempoLlegada);
-        }
-      
-        System.out.println("Cantidad de servidores: ");
-        cantServidores = s.nextInt();
+//        System.out.println("Tiempo entre llegadas: Cantidad de valores");
+//        cantValores = s.nextInt();
+//        int min = 0;
+//        int max = 0;
+//        for (int i = 0; i < cantValores; i++) {
+//            int valor = 0;
+//            float probabilidad = 0;
+//            System.out.println("Introduce el valor del tiempo de llegada: "+i);
+//            valor = s.nextInt();
+//            System.out.println("Introduce la probabilidad del tiempo de llegada: "+i);
+//            probabilidad = s.nextFloat();
+//            max += probabilidad*100;
+//            Tiempo tiempoLlegada = new Tiempo(valor, probabilidad, min, max-1);
+//            min +=probabilidad*100;
+//            
+//            tiemposLlegada.add(tiempoLlegada);
+//        }
+        tiemposLlegada.add(createTiempo(1, 0.3f, 0, 29));
+        tiemposLlegada.add(createTiempo(2, 0.3f, 30, 59));
+        tiemposLlegada.add(createTiempo(3, 0.4f, 60, 99));
+
         
-        System.out.println("Tiempos de servicio para cada servidor: Cantidad de valores");
-        cantValores = s.nextInt();
-        min = 0;
-        max = 0;
-        for (int i = 0; i < cantValores; i++) {
-            int valor = 0;
-            float probabilidad = 0;
-            System.out.println("Introduce el valor del tiempo de servicio: "+i);
-            valor = s.nextInt();
-            System.out.println("Introduce la probabilidad del tiempo de servicio: "+i);
-            probabilidad = s.nextFloat();
-            max += probabilidad*100;
-            TiempoServicio tiempoServicio = new TiempoServicio(valor, probabilidad, min, max-1);
-            min +=probabilidad*100;
-            tiemposServicios.add(tiempoServicio);
-        }
-     
+//        System.out.println("Cantidad de servidores: ");
+//        cantServidores = s.nextInt();
+//        
+//        System.out.println("Tiempos de servicio para cada servidor: Cantidad de valores");
+//        cantValores = s.nextInt();
+//        min = 0;
+//        max = 0;
+//        for (int i = 0; i < cantValores; i++) {
+//            int valor = 0;
+//            float probabilidad = 0;
+//            System.out.println("Introduce el valor del tiempo de servicio: "+i);
+//            valor = s.nextInt();
+//            System.out.println("Introduce la probabilidad del tiempo de servicio: "+i);
+//            probabilidad = s.nextFloat();
+//            max += probabilidad*100;
+//            Tiempo tiempoServicio = new Tiempo(valor, probabilidad, min, max-1);
+//            min +=probabilidad*100;
+//            tiemposServicios.add(tiempoServicio);
+//        }
+        
+        tiemposServicios.add(createTiempo(1, 0.3f, 0, 29));
+        tiemposServicios.add(createTiempo(2, 0.3f, 30, 59));
+        tiemposServicios.add(createTiempo(3, 0.4f, 60, 99));
+        
         System.out.println("Costo de cada servidor");
         costoServidor = s.nextInt();
             
@@ -106,6 +113,11 @@ public class main {
         simulacion.play();
         
         
+    }
+    
+    public static Tiempo createTiempo(int valor, float probabilidad, int min, int max){
+        Tiempo tiempo = new Tiempo(valor, probabilidad, min, max);
+        return tiempo;
     }
     
 }

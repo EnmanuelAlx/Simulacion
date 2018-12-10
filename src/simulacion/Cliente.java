@@ -10,22 +10,20 @@ package simulacion;
  * @author Enmanuel
  */
 public class Cliente {
-    int tiempoEspera;
-    int tiempoServicio;
-    double probabilidad;
+    private int tiempoEntrada;
+    private int tiempoServicio;
 
-    public Cliente(int tiempoEspera, int tiempoServicio, double probabilidad) {
-        this.tiempoEspera = tiempoEspera;
+    public Cliente(int tiempoEntrada, int tiempoServicio) {
+        this.tiempoEntrada = tiempoEntrada;
         this.tiempoServicio = tiempoServicio;
-        this.probabilidad = probabilidad;
     }
 
-    public int getTiempoEspera() {
-        return tiempoEspera;
+    public int getTiempoEntrada() {
+        return tiempoEntrada;
     }
 
-    public void setTiempoEspera(int tiempoEspera) {
-        this.tiempoEspera = tiempoEspera;
+    public void setTiempoEntrada(int tiempoEntrada) {
+        this.tiempoEntrada = tiempoEntrada;
     }
 
     public int getTiempoServicio() {
@@ -35,16 +33,7 @@ public class Cliente {
     public void setTiempoServicio(int tiempoServicio) {
         this.tiempoServicio = tiempoServicio;
     }
-
-    public double getProbabilidad() {
-        return probabilidad;
-    }
-
-    public void setProbabilidad(double probabilidad) {
-        this.probabilidad = probabilidad;
-    }
-
+    
     
 
-    
 }

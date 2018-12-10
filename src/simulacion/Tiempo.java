@@ -9,13 +9,13 @@ package simulacion;
  *
  * @author Enmanuel
  */
-public class TiempoLlegada {
+public class Tiempo {
     private int valor;
     private float probabilidad;
     private int min;
     private int max;
 
-    public TiempoLlegada(int valor, float probabilidad, int min, int max) {
+    public Tiempo(int valor, float probabilidad, int min, int max) {
         this.valor = valor;
         this.probabilidad = probabilidad;
         this.min = min;
@@ -57,7 +57,4 @@ public class TiempoLlegada {
     public void setMax(int max) {
         this.max = max;
     }
-    
-    
-    
 }
