@@ -21,11 +21,15 @@ public class TiempoLlegada {
         this.min = min;
         this.max = max;
     }
-
+    //comentario qeu se debe eliminar
     public int getValor() {
         return valor;
     }
-
+    
+    public void vacio(){
+        
+    }
+    
     public void setValor(int valor) {
         this.valor = valor;
     }
