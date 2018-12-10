@@ -15,9 +15,11 @@ public class TiempoServicio {
     private int min;
     private int max;
 
-    public TiempoServicio(int valor, float probabilidad) {
+    public TiempoServicio(int valor, float probabilidad, int min, int max) {
         this.valor = valor;
         this.probabilidad = probabilidad;
+        this.min = min;
+        this.max = max;
     }
 
     public int getValor() {
@@ -36,13 +38,22 @@ public class TiempoServicio {
         this.probabilidad = probabilidad;
     }
 
-    public int getProbAcumulada() {
-        return probAcumulada;
+    public int getMin() {
+        return min;
     }
 
-    public void setProbAcumulada(int probAcumulada) {
-        this.probAcumulada = probAcumulada;
+    public void setMin(int min) {
+        this.min = min;
     }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
     
     
     
