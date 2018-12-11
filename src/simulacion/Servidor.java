@@ -12,9 +12,21 @@ package simulacion;
 public class Servidor {
     int costo;
     Cliente cliente;
+    private int proximaSalida;
+    private boolean status;
 
-    public Servidor(int costo) {
-        this.costo = costo;
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
+    public Servidor(int proximaSalida, boolean status) {
+        this.proximaSalida = proximaSalida;
+        this.status = status;
+        
     }
 
     public int getCosto() {
@@ -32,6 +44,13 @@ public class Servidor {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
+
+    public int getProximaSalida() {
+        return proximaSalida;
+    }
+
+    public void setProximaSalida(int proximaSalida) {
+        this.proximaSalida = proximaSalida;
+    }
+
 }

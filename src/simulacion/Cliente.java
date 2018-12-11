@@ -12,7 +12,7 @@ package simulacion;
 public class Cliente {
     private int tiempoEntrada;
     private int tiempoServicio;
-
+       
     public Cliente(int tiempoEntrada, int tiempoServicio) {
         this.tiempoEntrada = tiempoEntrada;
         this.tiempoServicio = tiempoServicio;
