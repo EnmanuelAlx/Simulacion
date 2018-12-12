@@ -69,7 +69,7 @@ public class main {
         tiemposLlegada.add(createTiempo(3, 0.4f, 60, 99));
 
         
-        System.out.println("Cantidad de servidores: ");
+        System.out.print("Cantidad de servidores: ");
         cantServidores = s.nextInt();
 //        
 //        System.out.println("Tiempos de servicio para cada servidor: Cantidad de valores");
