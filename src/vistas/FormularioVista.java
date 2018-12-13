@@ -9,12 +9,12 @@ package vistas;
  *
  * @author Jose Andres
  */
-public class TiempoPanel extends javax.swing.JPanel {
+public class FormularioVista extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public TiempoPanel() {
+    public FormularioVista() {
         initComponents();
     }
 
@@ -36,6 +36,7 @@ public class TiempoPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        jComboBox1.setBackground(new java.awt.Color(238, 238, 238));
         jComboBox1.setEditable(true);
         jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
