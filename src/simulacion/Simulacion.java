@@ -78,7 +78,7 @@ public class Simulacion {
     
     public void limpiarServidores(){
         for (Servidor server : servidores) {
-            if(!server.isVacio() && server.getSalida()==this.tiempoModelo){
+            if(!server.isVacio() && server.getSalida()<=this.tiempoModelo){
                 server.setVacio(true);
                 server.setCliente(null);
                 server.setSalida(99999);
@@ -88,13 +88,16 @@ public class Simulacion {
     
     public void play(){
         for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
-            limpiarServidores();
             if(this.AT<this.DT){
                 llegadaCliente();
             }
             else{
                 salidaCliente();
-            }           
+            }      
+            System.out.println("_________Clientes en cola_____________________");
+            for (Cliente cliente : colaClientes) {
+                System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
+            }
             System.out.println("____________________________________________");
         }
     }
@@ -132,7 +135,7 @@ public class Simulacion {
         
         this.TE = generarTE();
         this.incrementAT(this.TE);
-        
+        limpiarServidores();
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
         for (Servidor server : servidores) {
             System.out.println("Server vacio: "+server.isVacio()+" Tiempo salida: "+server.getSalida());
@@ -150,7 +153,7 @@ public class Simulacion {
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);
-                    this.TS = generarTS();
+                    this.TS = cliente.getTiempoServicio();
                     incrementDT(this.TS);
                     server.setCliente(cliente);
                     server.setSalida(this.DT);
@@ -163,7 +166,7 @@ public class Simulacion {
             this.DT=99999;
         }
         
-        
+        limpiarServidores();
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
         for (Servidor server : servidores) {
             System.out.println("Server "+server.isVacio()+" Tiempo salida: "+server.getSalida());
