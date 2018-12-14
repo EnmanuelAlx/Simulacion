@@ -140,7 +140,7 @@ public class Simulacion {
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
     }
     
-   
+   //Puto Zacarias
     public void salidaCliente(){
         System.out.println("Salida!!");
         setTMtoDT();
