@@ -87,19 +87,22 @@ public class Simulacion {
     }
     
     public void play(){
-        for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
-            if(this.AT<this.DT){
-                llegadaCliente();
+//        for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
+        
+            while (this.tiempoTotalSimulacion>=this.tiempoModelo) {            
+                if(this.AT<this.DT){
+                    llegadaCliente();
+                }
+                else{
+                    salidaCliente();
+                }      
+                System.out.println("_________Clientes en cola_____________________");
+                for (Cliente cliente : colaClientes) {
+                    System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
+                }
+                System.out.println("____________________________________________");
             }
-            else{
-                salidaCliente();
-            }      
-            System.out.println("_________Clientes en cola_____________________");
-            for (Cliente cliente : colaClientes) {
-                System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
-            }
-            System.out.println("____________________________________________");
-        }
+//        }
     }
     
     public void llegadaCliente(){
