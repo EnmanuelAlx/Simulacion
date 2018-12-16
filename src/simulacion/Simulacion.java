@@ -16,13 +16,13 @@ import java.util.Queue;
  */
 public class Simulacion {
     
-    private int tiempoSimulacion;
-    private int tiempoTotalSimulacion;
+    private float tiempoSimulacion;
+    private float tiempoTotalSimulacion;
     private int cantMaxClientes;
     private ArrayList<Tiempo> tiemposLlegada;
     private ArrayList<Tiempo> tiempoServicios;
-    private int costoServidor;
-    private int costoEspera;
+    private float costoServidor;
+    private float costoEspera;
     private int tablaEventos;
     
     
@@ -44,9 +44,9 @@ public class Simulacion {
     private ArrayList<Servidor> servidores;
     
     
-    public Simulacion(int tiempoSimulacion, int cantClientes, ArrayList<Tiempo> tiemposLlegada,
-                      ArrayList<Tiempo> tiempoServicios, int costoServidor, int costoEspera,
-                      int tablaEventos, int cantidadServidores, boolean esFinito, int tiempoTotal) {
+    public Simulacion(float tiempoSimulacion, int cantClientes, ArrayList<Tiempo> tiemposLlegada,
+                      ArrayList<Tiempo> tiempoServicios, float costoServidor, float costoEspera,
+                      int tablaEventos, int cantidadServidores, boolean esFinito, float tiempoTotal) {
         this.tiempoSimulacion = tiempoSimulacion;
         this.cantMaxClientes = cantClientes;
         this.tiemposLlegada = tiemposLlegada;

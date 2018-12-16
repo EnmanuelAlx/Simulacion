@@ -5,6 +5,12 @@
  */
 package vistas;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import simulacion.Simulacion;
+import simulacion.Tiempo;
+import static simulacion.main.createTiempo;
+
 /**
  *
  * @author Jose Andres
@@ -27,65 +33,72 @@ public class FormularioVista extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        unidadTiempoSelector = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        timeporServicioCantValores = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cantidadServidoresSelector = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        verTablaCheck = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tiempoEntreLlegadasTabla = new javax.swing.JTable();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        volverBoton = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        continuarBoton = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        tiempoSimulacionTextField = new javax.swing.JTextField();
+        costoServidorTextField = new javax.swing.JTextField();
+        costoEsperaTextField = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        clientesPermitidosSelector1 = new javax.swing.JSpinner();
+        jLabel19 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setBackground(new java.awt.Color(238, 238, 238));
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        unidadTiempoSelector.setBackground(new java.awt.Color(238, 238, 238));
+        unidadTiempoSelector.setEditable(true);
+        unidadTiempoSelector.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        unidadTiempoSelector.setForeground(new java.awt.Color(102, 102, 102));
+        unidadTiempoSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Segundos", "Minutos", "Horas", "Días", "Semanas", "Meses", "Años" }));
+        unidadTiempoSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                unidadTiempoSelectorActionPerformed(evt);
             }
         });
-
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
-
-        jLabel2.setBackground(new java.awt.Color(51, 153, 255));
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Aceptar");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(unidadTiempoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 250, 30));
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Selección de Tiempo");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Llene el Formulario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(298, 298, 298))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,49 +108,363 @@ public class FormularioVista extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Selecciona la unidad de tiempo ");
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("1.- Selecciona la unidad de tiempo ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 290, -1));
+
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("8.- Visualizar tabla de eventos");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 250, 30));
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("7.- Tiempo de servicio para cada servidor");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 340, -1));
+
+        timeporServicioCantValores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        timeporServicioCantValores.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                actCantValoresStateChanged(evt);
+            }
+        });
+        add(timeporServicioCantValores, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 70, 30));
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("(Cantidad de valores)");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 160, 30));
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel8.setText("4.- Cantidad de servidores");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 290, -1));
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("3.- Clientes permitidos en el sistema");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 290, -1));
+
+        cantidadServidoresSelector.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cantidadServidoresSelector.setValue(2);
+        add(cantidadServidoresSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 70, 30));
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setText("Servidores");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 90, 30));
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("5.- Costo de cada servidor");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 290, -1));
+
+        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel12.setText("moneda/servidor");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 130, 30));
+
+        jLabel13.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel13.setText("6.- Costo de espera por cliente");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 290, -1));
+
+        jLabel14.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel14.setText("moneda/servidor");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 130, 30));
+
+        jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 20, 370));
+
+        verTablaCheck.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verTablaCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTablaCheckActionPerformed(evt);
+            }
+        });
+        add(verTablaCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 30, 30));
+
+        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("1.- Selecciona la unidad de tiempo ");
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 290, -1));
+
+        tiempoEntreLlegadasTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tiempo", "Probabilidad"
+            }
+        ));
+        jScrollPane1.setViewportView(tiempoEntreLlegadasTabla);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 340, 160));
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("2.- Tiempo total de simulacion");
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 270, -1));
+
+        jLabel17.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setText("Unidad Tiempo");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 120, 30));
+
+        volverBoton.setBackground(new java.awt.Color(255, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 22)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Volver");
+
+        javax.swing.GroupLayout volverBotonLayout = new javax.swing.GroupLayout(volverBoton);
+        volverBoton.setLayout(volverBotonLayout);
+        volverBotonLayout.setHorizontalGroup(
+            volverBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(volverBotonLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+        volverBotonLayout.setVerticalGroup(
+            volverBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(volverBotonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        add(volverBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 160, 50));
+
+        continuarBoton.setBackground(new java.awt.Color(125, 202, 131));
+        continuarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iniciarSimulacion(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 22)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Continuar");
+
+        javax.swing.GroupLayout continuarBotonLayout = new javax.swing.GroupLayout(continuarBoton);
+        continuarBoton.setLayout(continuarBotonLayout);
+        continuarBotonLayout.setHorizontalGroup(
+            continuarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(continuarBotonLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        continuarBotonLayout.setVerticalGroup(
+            continuarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(continuarBotonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        add(continuarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 160, 50));
+
+        tiempoSimulacionTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tiempoSimulacionTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiempoSimulacionTextFieldActionPerformed(evt);
+            }
+        });
+        add(tiempoSimulacionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 70, 30));
+
+        costoServidorTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        costoServidorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                costoServidorTextFieldActionPerformed(evt);
+            }
+        });
+        add(costoServidorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 70, 30));
+        add(costoEsperaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 70, 30));
+
+        jLabel18.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("3.- Clientes permitidos en el sistema");
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 290, -1));
+
+        clientesPermitidosSelector1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        clientesPermitidosSelector1.setValue(2);
+        add(clientesPermitidosSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 70, 30));
+
+        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setText("Clientes");
+        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 70, 20));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void unidadTiempoSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadTiempoSelectorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_unidadTiempoSelectorActionPerformed
+
+    private void verTablaCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTablaCheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verTablaCheckActionPerformed
+
+    private void actCantValoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_actCantValoresStateChanged
+        
+        DefaultTableModel model = (DefaultTableModel) this.tiempoEntreLlegadasTabla.getModel();
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--)
+            model.removeRow(i);
+       
+        
+        int cantValores = (int)this.timeporServicioCantValores.getValue();
+        System.out.println(cantValores);
+        for (int i=0; i <cantValores; i++ )
+            model.addRow(new Object[]{"", ""});
+    }//GEN-LAST:event_actCantValoresStateChanged
+
+    private void iniciarSimulacion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSimulacion
+        int tiempoSimulacion = 6;
+        int cantClientes = 0;
+        int cantServidores = 0;
+        int tablaEventos = 1;
+        float costoEspera = 0;
+        int cantValores;
+        float costoServidor = 0;
+        float tiempoTotal = 0;
+        ArrayList<Tiempo> tiemposLlegada = new ArrayList<Tiempo>();
+        ArrayList<Tiempo> tiemposServicios = new ArrayList<Tiempo>();
+        
+        
+        
+        switch ((String) this.unidadTiempoSelector.getModel().getSelectedItem()) {
+            case "Segundos":
+                tiempoSimulacion = 1;
+                break;
+            case "Minutos":  
+                tiempoSimulacion = 2;
+                break;
+            case "Horas":  
+                tiempoSimulacion = 3;
+                break;
+            case "Días": 
+                tiempoSimulacion = 4;
+                break;
+            case "Semanas": 
+                tiempoSimulacion = 5;
+                break;
+            case "Meses": 
+                tiempoSimulacion = 6;
+                break;
+            case "Años": 
+                tiempoSimulacion = 7;
+                break;
+        }
+        
+        try{
+            tiempoTotal = Float.parseFloat(this.tiempoSimulacionTextField.getText());
+            cantClientes = Integer.parseInt(this.cantidadServidoresSelector.getModel().getValue().toString());
+            costoServidor = Float.parseFloat(this.costoServidorTextField.getText());
+            costoEspera = Float.parseFloat(this.costoEsperaTextField.getText());
+            cantServidores = Integer.parseInt(this.cantidadServidoresSelector.getModel().getValue().toString());
+            
+            if(this.verTablaCheck.isSelected()){
+                tablaEventos = 1;
+            }
+            else{
+                tablaEventos = 2;
+            }
+            
+            System.out.println("Tiempo total: "+tiempoTotal 
+                                + " CantClientes: "+cantClientes
+                                + " costoServidor: "+ costoServidor
+                                + " costoEspera: " +costoEspera);
+        }catch(Exception e){
+            
+            System.err.println("ERRORR:  " + e );
+            
+        }
+        
+        tiemposLlegada.add(createTiempo(1, 0.3f, 0, 29));
+        tiemposLlegada.add(createTiempo(2, 0.3f, 30, 59));
+        tiemposLlegada.add(createTiempo(3, 0.4f, 60, 99));
+        
+        
+        tiemposServicios.add(createTiempo(1, 0.2f, 0, 19));
+        tiemposServicios.add(createTiempo(2, 0.2f, 20, 39));
+        tiemposServicios.add(createTiempo(3, 0.2f, 40, 59));
+        tiemposServicios.add(createTiempo(4, 0.2f, 60, 79));
+        tiemposServicios.add(createTiempo(5, 0.2f, 80, 99));
+        
+        Simulacion simulacion = new Simulacion(
+            tiempoSimulacion,
+            cantClientes,
+            tiemposLlegada,
+            tiemposServicios,
+            costoServidor,
+            costoEspera,
+            tablaEventos,
+            cantServidores,
+            false,
+            tiempoTotal);
+        
+        simulacion.play();
+
+        
+        
+        
+        
+    }//GEN-LAST:event_iniciarSimulacion
+
+    private void tiempoSimulacionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoSimulacionTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tiempoSimulacionTextFieldActionPerformed
+
+    private void costoServidorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoServidorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_costoServidorTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JSpinner cantidadServidoresSelector;
+    public javax.swing.JSpinner clientesPermitidosSelector1;
+    public javax.swing.JPanel continuarBoton;
+    public javax.swing.JTextField costoEsperaTextField;
+    public javax.swing.JTextField costoServidorTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    public javax.swing.JTable tiempoEntreLlegadasTabla;
+    private javax.swing.JTextField tiempoSimulacionTextField;
+    public javax.swing.JSpinner timeporServicioCantValores;
+    public javax.swing.JComboBox<String> unidadTiempoSelector;
+    public javax.swing.JCheckBox verTablaCheck;
+    public javax.swing.JPanel volverBoton;
     // End of variables declaration//GEN-END:variables
 }
