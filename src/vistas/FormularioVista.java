@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import simulacion.Simulacion;
 import simulacion.Tiempo;
-import static simulacion.main.createTiempo;
 
 /**
  *
@@ -392,16 +391,16 @@ public class FormularioVista extends javax.swing.JPanel {
             
         }
         
-        tiemposLlegada.add(createTiempo(1, 0.3f, 0, 29));
-        tiemposLlegada.add(createTiempo(2, 0.3f, 30, 59));
-        tiemposLlegada.add(createTiempo(3, 0.4f, 60, 99));
-        
-        
-        tiemposServicios.add(createTiempo(1, 0.2f, 0, 19));
-        tiemposServicios.add(createTiempo(2, 0.2f, 20, 39));
-        tiemposServicios.add(createTiempo(3, 0.2f, 40, 59));
-        tiemposServicios.add(createTiempo(4, 0.2f, 60, 79));
-        tiemposServicios.add(createTiempo(5, 0.2f, 80, 99));
+//        tiemposLlegada.add(createTiempo(1, 0.3f, 0, 29));
+//        tiemposLlegada.add(createTiempo(2, 0.3f, 30, 59));
+//        tiemposLlegada.add(createTiempo(3, 0.4f, 60, 99));
+//        
+//        
+//        tiemposServicios.add(createTiempo(1, 0.2f, 0, 19));
+//        tiemposServicios.add(createTiempo(2, 0.2f, 20, 39));
+//        tiemposServicios.add(createTiempo(3, 0.2f, 40, 59));
+//        tiemposServicios.add(createTiempo(4, 0.2f, 60, 79));
+//        tiemposServicios.add(createTiempo(5, 0.2f, 80, 99));
         
         Simulacion simulacion = new Simulacion(
             tiempoSimulacion,
@@ -413,7 +412,7 @@ public class FormularioVista extends javax.swing.JPanel {
             tablaEventos,
             cantServidores,
             false,
-            tiempoTotal);
+            tiempoTotal, null);
         
         simulacion.play();
 

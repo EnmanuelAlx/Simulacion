@@ -12,10 +12,11 @@ package simulacion;
 public class Cliente {
     private int tiempoEntrada;
     private int tiempoServicio;
-       
-    public Cliente(int tiempoEntrada, int tiempoServicio) {
+    private int tiempoLlegadaSistema;
+    public Cliente(int tiempoEntrada, int tiempoServicio, int tiempoLlegadaSistema,int tiempoLlegadaCola) {
         this.tiempoEntrada = tiempoEntrada;
         this.tiempoServicio = tiempoServicio;
+        this.tiempoLlegadaSistema = tiempoLlegadaSistema;
     }
 
     public int getTiempoEntrada() {
@@ -24,6 +25,14 @@ public class Cliente {
 
     public void setTiempoEntrada(int tiempoEntrada) {
         this.tiempoEntrada = tiempoEntrada;
+    }
+
+    public int getTiempoLlegadaSistema() {
+        return tiempoLlegadaSistema;
+    }
+
+    public void setTiempoLlegadaSistema(int tiempoLlegadaSistema) {
+        this.tiempoLlegadaSistema = tiempoLlegadaSistema;
     }
 
     public int getTiempoServicio() {

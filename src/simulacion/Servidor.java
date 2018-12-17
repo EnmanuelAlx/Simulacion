@@ -10,13 +10,18 @@ package simulacion;
  * @author Enmanuel
  */
 public class Servidor {
-    int costo;
+    float costo;
     Cliente cliente;
     private boolean vacio;
     private int salida;
-    public Servidor(boolean vacio) {
+    private int tiempoUtilizacion;
+    private int cantVecesUsado;
+    public Servidor(boolean vacio, float costo) {
         this.vacio = vacio;
         this.salida = 99999;
+        this.tiempoUtilizacion = 0;
+        this.costo = costo;
+        this.cantVecesUsado = 0;
     }
 
     public boolean isVacio() {
@@ -28,6 +33,10 @@ public class Servidor {
     }
 
     public void setCliente(Cliente cliente) {
+        if(cliente!=null){
+            this.tiempoUtilizacion += cliente.getTiempoServicio();
+            this.cantVecesUsado++;
+        }
         this.cliente = cliente;
     }
 
@@ -39,8 +48,19 @@ public class Servidor {
         return cliente;
     }
 
+    public int getTiempoUtilizacion() {
+        return tiempoUtilizacion;
+    }
     public int getSalida() {
         return salida;
+    }
+
+    public float getCosto() {
+        return costo;
+    }
+
+    public int getCantVecesUsado() {
+        return cantVecesUsado;
     }
 
     

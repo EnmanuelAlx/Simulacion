@@ -35,7 +35,17 @@ public class Simulacion {
     private Queue<Cliente> colaClientes;
     private float SumCostoEspera;
     private boolean esFinito;
+    private int cantEventos;
     
+    private int cantClientesNoEspera;
+    private int cantClientesNoAtendidos;
+    private float probEspera;
+    private float cantPromedioClientesCola;
+    private float cantPromedioClientesSistema;
+    private int cantClientesSistema;
+    private int tiempoPromedioClienteCola;
+    private int tiempoPromedioClienteSistema;
+    private int cantClienteCola;
     
     ////////Cambiar por ts = tiempo salida y te = tiempo entrada
     private int TS; 
@@ -46,7 +56,7 @@ public class Simulacion {
     
     public Simulacion(float tiempoSimulacion, int cantClientes, ArrayList<Tiempo> tiemposLlegada,
                       ArrayList<Tiempo> tiempoServicios, float costoServidor, float costoEspera,
-                      int tablaEventos, int cantidadServidores, boolean esFinito, float tiempoTotal) {
+                      int tablaEventos, int cantidadServidores, boolean esFinito, float tiempoTotal, ArrayList<Servidor> servidores) {
         this.tiempoSimulacion = tiempoSimulacion;
         this.cantMaxClientes = cantClientes;
         this.tiemposLlegada = tiemposLlegada;
@@ -63,33 +73,46 @@ public class Simulacion {
         this.statusServer = false;
         this.colaClientes = new LinkedList();
         this.SumCostoEspera = 0;
-        this.servidores = new ArrayList<Servidor>();
-        initServidores();
+        this.servidores = servidores;
+        this.cantEventos = 0;
+        this.cantClientesNoEspera = 0;
+        this.cantClientesNoAtendidos = 0;
+        this.probEspera = 0;
+        this.cantPromedioClientesCola = 0;
+        this.cantClientesSistema=0;
+        this.tiempoPromedioClienteCola=0;
+        this.tiempoPromedioClienteSistema=0;
+        this.cantPromedioClientesSistema=0;
+        this.cantClienteCola= 0;
     }
     
-   
-    public void initServidores(){
-        //Si tiene costos pasarlo por aqui cualquier cosa cambiar algo 
-        for (int i = 0; i < this.cantidadServidores; i++) {
-            Servidor server = new Servidor(true);
-            this.servidores.add(server);
+    public int menorDT(){
+        int menor = 9999999;
+        for (Servidor server : servidores) {
+            if(server.getSalida()<menor){
+                menor = server.getSalida();
+            }
         }
+        return menor;
     }
     
     public void limpiarServidores(){
         for (Servidor server : servidores) {
-            if(!server.isVacio() && server.getSalida()<=this.tiempoModelo){
+            if(!server.isVacio() && server.getSalida()==this.tiempoModelo){
+                Cliente cliente = server.getCliente();
+                this.tiempoPromedioClienteSistema = this.tiempoModelo - cliente.getTiempoEntrada();
                 server.setVacio(true);
                 server.setCliente(null);
-                server.setSalida(99999);
+                server.setSalida(99999999);
             }
         }
     }
     
     public void play(){
 //        for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
-        
-            while (this.tiempoTotalSimulacion>=this.tiempoModelo) {            
+            while (this.tiempoTotalSimulacion>=this.tiempoModelo) {
+                this.cantEventos++;
+                this.DT = menorDT();
                 if(this.AT<this.DT){
                     llegadaCliente();
                 }
@@ -102,22 +125,73 @@ public class Simulacion {
                 }
                 System.out.println("____________________________________________");
             }
+            MostrarEstadisticas();
 //        }
+    }
+    
+    public void MostrarEstadisticas(){
+        cantPromedioClientes();
+        System.out.println("Cantidad Cientes que no esperan: "+this.cantClientesNoEspera);
+        System.out.println("Cantidad Clientes que se van sin ser atendidos: "+this.cantClientesNoAtendidos);
+        System.out.println("Probabilidad de esperar: "+(float)this.probEspera);
+        System.out.println("Cantidad Promedio clientes en cola: "+this.cantPromedioClientesCola);
+        System.out.println("Cantidad Promedio clientes en Sistema: "+this.cantPromedioClientesSistema);
+        int sumaTotalUsoServer= 0;
+        for (Servidor server: servidores) {
+            sumaTotalUsoServer+=server.getTiempoUtilizacion();
+        }
+        for (Servidor server: servidores) {
+            System.out.println("Porcentaje de utilizacion de servidor: "+server+" es: "+((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100);
+        }
+        System.out.println("Utilizacion general: "+(float)sumaTotalUsoServer/(float)servidores.size());
+        System.out.println("Tiempo promedio de un cliente en cola: "+tiempoPromedioCola());
+        System.out.println("Tiempo promedio de un cliente en el sistema: "+tiempoPromedioSistema());
+        System.out.println("Costo promedio de espera: "+tiempoPromedioCola()*this.costoEspera);
+        System.out.println("Tiempo promedio de espera del cliente que hace cola: "+this.tiempoPromedioClienteCola/cantClienteCola);
+        for (Servidor server: servidores) {
+            System.out.println("Costo servidor: "+server+" es: "+(((float)server.getTiempoUtilizacion()/(float)server.getCantVecesUsado())*server.getCosto()));
+        }
+    }
+    
+    public float tiempoPromedioCola(){
+        return (float)this.tiempoPromedioClienteCola/this.tiempoSimulacion;
+    }
+    
+    public float tiempoPromedioSistema(){
+        return (float)this.tiempoPromedioClienteSistema/this.tiempoSimulacion;
+    }
+    
+    public void cantPromedioClientes(){
+        this.cantPromedioClientesCola = this.cantPromedioClientesCola/this.tiempoModelo;
+        this.cantPromedioClientesSistema = this. cantPromedioClientesSistema/this.tiempoModelo;
+    }
+    
+    public void cantPromeClientes(int TManterior){
+        this.cantPromedioClientesCola+= this.colaClientes.size() * Math.abs(TManterior-this.tiempoModelo);
+        this.cantPromedioClientesSistema+=this.cantClientesSistema * Math.abs(TManterior-this.tiempoModelo);
     }
     
     public void llegadaCliente(){
         System.out.println("Llegada!");
+        this.cantClientesSistema++;
+        int TMant = this.tiempoModelo;
         boolean todosFull = true;
         setTMtoAT();
          
+        if(this.cantMaxClientes == this.colaClientes.size()){
+            this.cantClientesNoAtendidos++;
+            todosFull=false;
+        }
+        
         for (Servidor server : servidores) {
             if(server.isVacio() && this.colaClientes.isEmpty()){
                 server.setVacio(false);
                 this.TS = generarTS();
                 incrementDT(this.TS);
-                Cliente cliente = new Cliente(this.TE, this.TS);
+                Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, -1);
                 server.setCliente(cliente);
                 server.setSalida(this.DT);
+                this.cantClientesNoEspera++;
                 todosFull = false;
                 break;
             }
@@ -132,13 +206,15 @@ public class Simulacion {
             }
         }           
         if(todosFull){
-            Cliente cliente = new Cliente(this.TE, this.TS);
+            Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, this.tiempoModelo);
             this.colaClientes.add(cliente);
+            this.probEspera+= ((float)this.colaClientes.size()/(float)this.cantClientesSistema);
         }
         
         this.TE = generarTE();
         this.incrementAT(this.TE);
         limpiarServidores();
+        cantPromeClientes(TMant);
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
         for (Servidor server : servidores) {
             System.out.println("Server vacio: "+server.isVacio()+" Tiempo salida: "+server.getSalida());
@@ -146,13 +222,15 @@ public class Simulacion {
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
     }
     
-   //Puto Zacarias
     public void salidaCliente(){
         System.out.println("Salida!!");
+        int TMant = this.tiempoModelo;
         setTMtoDT();
-        boolean existClientes = true;
         if(!this.colaClientes.isEmpty()){
+            limpiarServidores();
             Cliente cliente = this.colaClientes.poll();
+            cantClienteCola++;
+            tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);
@@ -166,10 +244,9 @@ public class Simulacion {
         }
         else{
             limpiarServidores();
-            this.DT=99999;
+            this.DT=999999;
         }
-        
-        limpiarServidores();
+        cantPromeClientes(TMant);
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
         for (Servidor server : servidores) {
             System.out.println("Server "+server.isVacio()+" Tiempo salida: "+server.getSalida());
@@ -177,78 +254,6 @@ public class Simulacion {
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
     }
     
-    
-//    public void llegadaCliente(){
-//        int acum = 0;
-//        System.out.println("Llegadaaaaaaaaaaaaa");
-//        if(this.esFinito && this.colaClientes.size()>=this.cantMaxClientes){
-//            incrementarCostoEspera();
-//            return;
-//        }
-//        setTMtoAT();
-////        if(!this.statusServer){
-////            this.statusServer = true;
-////            this.TS = generarTS();
-////            this.incrementDT(this.TS);
-////        }
-//        if(this.colaClientes.isEmpty()){
-//            for (Servidor server : servidores) {
-//                if(!server.isStatus()){
-//                    this.TS = generarTS();
-//                    incrementDT(this.TS, server);
-//                    asignarTiempoSalida();
-//                    server.setStatus(true);
-//                    
-//                }else{
-//                    acum++;
-//                }        
-//            }
-//            if(acum == this.servidores.size()){
-//                Cliente cliente = new Cliente(this.TE, this.TS);
-//                this.colaClientes.add(cliente);
-//            }
-//        }      
-//        else{
-//            Cliente cliente = new Cliente(this.TE, this.TS);
-//            this.colaClientes.add(cliente);
-//        }
-//        this.TE = generarTE();
-//        this.incrementAT(this.TE);
-//        System.out.println("TM: "+this.tiempoModelo+" SS: "+this.statusServer+" WL: "+this.colaClientes.size()+" AT: "+this.tiempoLlegada+" DT: "+this.tiempoSalida);
-//        
-//    }
-    
-   
-    
-//    public void salidaClienteDeLaCola(){
-//        System.out.println("Salidaaaaaaaaaaaaaa");
-//
-//        setTMtoDT();
-//        if(!this.colaClientes.isEmpty()){
-//            Cliente cliente = this.colaClientes.poll();
-//            for (Servidor server : servidores) {
-//                if(server.getProximaSalida() == this.tiempoModelo){
-//                    incrementDT(cliente.getTiempoServicio(), server);
-//                    server.setStatus(true);
-//                    asignarTiempoSalida();
-//                }  
-//            }
-//        }
-//        else{
-//            for (Servidor server : servidores) {
-//                if(server.getProximaSalida() == this.tiempoModelo){
-//                    server.setProximaSalida(99999999);
-//                    server.setStatus(false);
-//                    asignarTiempoSalida();
-//                } 
-//                
-//            }
-////            this.statusServer = false;
-////            this.tiempoSalida = 99999;
-//        }
-//        System.out.println("TM: "+this.tiempoModelo+" SS: "+this.statusServer+" WL: "+this.colaClientes.size()+" AT: "+this.tiempoLlegada+" DT: "+this.tiempoSalida);
-//
-//    }
     
     public int generarTS(){
         Random rand = new Random();
@@ -269,8 +274,6 @@ public class Simulacion {
     }
     
     
-    
-
     public void setTMtoAT() {
         this.tiempoModelo = this.AT;
     }
@@ -279,10 +282,10 @@ public class Simulacion {
         this.tiempoModelo = this.DT;
     }
   
-    public Cliente generarCliente(int TE, int TS){
-        Cliente cliente = new Cliente(TE, TS);
-        return cliente;
-    }
+//    public Cliente generarCliente(int TE, int TS){
+//        Cliente cliente = new Cliente(TE, TS, this.tiempoModelo);
+//        return cliente;
+//    }
   
     private void incrementarCostoEspera(){
         this.SumCostoEspera += this.costoEspera;
