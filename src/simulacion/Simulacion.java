@@ -46,7 +46,7 @@ public class Simulacion {
     private int tiempoPromedioClienteCola;
     private int tiempoPromedioClienteSistema;
     private int cantClienteCola;
-    
+    private int cantidadTotalTiempoClientesCola;
     ////////Cambiar por ts = tiempo salida y te = tiempo entrada
     private int TS; 
     private int TE;
@@ -84,6 +84,7 @@ public class Simulacion {
         this.tiempoPromedioClienteSistema=0;
         this.cantPromedioClientesSistema=0;
         this.cantClienteCola= 0;
+        this.cantidadTotalTiempoClientesCola = 0;
     }
     
     public int menorDT(){
@@ -123,6 +124,11 @@ public class Simulacion {
                 for (Cliente cliente : colaClientes) {
                     System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
                 }
+                this.cantPromedioClientesSistema+=this.cantClientesSistema*this.tiempoModelo;
+                if(this.colaClientes.size()>0){
+                    this.cantPromedioClientesCola+=this.cantClientesSistema * this.tiempoModelo;
+                }
+                
                 System.out.println("____________________________________________");
             }
             MostrarEstadisticas();
@@ -133,9 +139,9 @@ public class Simulacion {
         cantPromedioClientes();
         System.out.println("Cantidad Cientes que no esperan: "+this.cantClientesNoEspera);
         System.out.println("Cantidad Clientes que se van sin ser atendidos: "+this.cantClientesNoAtendidos);
-        System.out.println("Probabilidad de esperar: "+(float)this.probEspera);
-        System.out.println("Cantidad Promedio clientes en cola: "+this.cantPromedioClientesCola);
-        System.out.println("Cantidad Promedio clientes en Sistema: "+this.cantPromedioClientesSistema);
+        System.out.println("Probabilidad de esperar: "+probabilidadEspera());
+        System.out.println("Cantidad Promedio clientes en cola: "+cantPromedioClientesCola());
+        System.out.println("Cantidad Promedio clientes en Sistema: "+cantPromedioClientesSistema());
         int sumaTotalUsoServer= 0;
         for (Servidor server: servidores) {
             sumaTotalUsoServer+=server.getTiempoUtilizacion();
@@ -154,12 +160,24 @@ public class Simulacion {
         }
     }
     
+    public float cantPromedioClientesCola(){
+        return (float)this.cantidadTotalTiempoClientesCola/(float)this.tiempoModelo;
+    }
+    
+    public float cantPromedioClientesSistema(){
+        return this.cantPromedioClientesSistema/this.tiempoModelo;
+    }
+    
+    public float probabilidadEspera(){
+        return this.probEspera = (float)(this.cantClientesSistema - this.cantClientesNoEspera) / (float)this.cantClientesSistema;
+    }
+    
     public float tiempoPromedioCola(){
-        return (float)this.tiempoPromedioClienteCola/this.tiempoSimulacion;
+        return (float)this.tiempoPromedioClienteCola/this.cantClientesSistema;
     }
     
     public float tiempoPromedioSistema(){
-        return (float)this.tiempoPromedioClienteSistema/this.tiempoSimulacion;
+        return (float)this.tiempoPromedioClienteSistema/this.cantClientesSistema;
     }
     
     public void cantPromedioClientes(){
@@ -209,7 +227,6 @@ public class Simulacion {
         if(todosFull){
             Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, this.tiempoModelo);
             this.colaClientes.add(cliente);
-            this.probEspera+= ((float)this.colaClientes.size()/(float)this.cantClientesSistema);
         }
         
         this.TE = generarTE();
@@ -231,7 +248,8 @@ public class Simulacion {
             limpiarServidores();
             Cliente cliente = this.colaClientes.poll();
             cantClienteCola++;
-            tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
+            this.cantidadTotalTiempoClientesCola += (this.tiempoModelo - cliente.getTiempoLlegadaCola());
+            this.tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);
