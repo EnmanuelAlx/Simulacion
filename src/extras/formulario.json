@@ -1,0 +1,34 @@
+{
+    "unidad_tiempo": "años",
+    "tiempo_simulacion": "10",
+    "clientes_permitidos": "10",
+    "servidores": "2",
+    "costo_servidores": "5",
+    "costo_espera": "5",
+    "llegada": {
+            "numero": [
+                    {
+                            "tiempo": "2",
+                            "probabilidad": "0.5"
+                    },
+                    {
+                            "tiempo": "3",
+                            "probabilidad": "0.5"
+                    }
+            ]
+    },
+    "servicio": {
+            "numero": [
+                    {
+                            "tiempo": "2",
+                            "probabilidad": "0.5"
+                    },
+                    {
+                            "tiempo": "3",
+                            "probabilidad": "0.5"
+                    }
+            ]
+    },
+    "tabla_eventos": "si"
+
+}

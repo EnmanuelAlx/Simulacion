@@ -147,7 +147,8 @@ public class Simulacion {
         System.out.println("Tiempo promedio de un cliente en cola: "+tiempoPromedioCola());
         System.out.println("Tiempo promedio de un cliente en el sistema: "+tiempoPromedioSistema());
         System.out.println("Costo promedio de espera: "+tiempoPromedioCola()*this.costoEspera);
-        System.out.println("Tiempo promedio de espera del cliente que hace cola: "+this.tiempoPromedioClienteCola/cantClienteCola);
+        if (cantClienteCola > 0)
+            System.out.println("Tiempo promedio de espera del cliente que hace cola: "+this.tiempoPromedioClienteCola/cantClienteCola);
         for (Servidor server: servidores) {
             System.out.println("Costo servidor: "+server+" es: "+(((float)server.getTiempoUtilizacion()/(float)server.getCantVecesUsado())*server.getCosto()));
         }

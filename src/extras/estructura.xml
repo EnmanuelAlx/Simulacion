@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<simulacion>
+    <unidad_tiempo>años</unidad_tiempo>
+    <tiempo_simulacion>10</tiempo_simulacion>
+    <clientes_permitidos>10</clientes_permitidos>
+    <servidores>2</servidores>
+    <costo_servidores>5</costo_servidores>
+    <costo_espera>5</costo_espera>
+    <llegada>
+        <numero>
+            <tiempo>2</tiempo>
+            <probabilidad>0.5</probabilidad>
+        </numero>
+        <numero>
+            <tiempo>3</tiempo>
+            <probabilidad>0.5</probabilidad>
+        </numero>
+    </llegada>
+    <servicio>
+        <numero>
+            <tiempo>2</tiempo>
+            <probabilidad>0.5</probabilidad>
+        </numero>
+        <numero>
+            <tiempo>3</tiempo>
+            <probabilidad>0.5</probabilidad>
+        </numero>
+    </servicio>
+    <tabla_eventos>si</tabla_eventos>
+</simulacion>
+
