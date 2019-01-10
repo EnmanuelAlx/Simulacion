@@ -29,6 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import static vistas.InicioVista.mainPanel;
 
 /**
  *
@@ -164,7 +165,7 @@ public class FormularioVista extends javax.swing.JPanel {
         tiempoServicioCantValores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tiempoServicioCantValores.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                actCantValoresStateChanged(evt);
+                tiempoServicioCantValoresStateChanged(evt);
             }
         });
         tiempoServicioCantValores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -393,12 +394,8 @@ public class FormularioVista extends javax.swing.JPanel {
     private void verTablaCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTablaCheckActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verTablaCheckActionPerformed
-
-    private void actCantValoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_actCantValoresStateChanged
-
-
-    }//GEN-LAST:event_actCantValoresStateChanged
-
+   
+    
     private void iniciarSimulacion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSimulacion
         int tiempoSimulacion = 6;
         int cantClientes = 0;
@@ -512,7 +509,7 @@ public class FormularioVista extends javax.swing.JPanel {
             servidores);
         
         simulacion.play();
-
+        
         
         
         
@@ -538,6 +535,10 @@ public class FormularioVista extends javax.swing.JPanel {
             archivo = new File(ruta);
             fr = new FileReader (archivo);
             br = new BufferedReader(fr);
+            DefaultTableModel tiempoServicioModel = (DefaultTableModel) this.tiempoServicioTabla.getModel();
+            DefaultTableModel tiempoLlegadaModel = (DefaultTableModel) this.tiempoEntreLlegadasTabla.getModel();
+            tiempoServicioModel.setRowCount(0);
+            tiempoLlegadaModel.setRowCount(0);
 
          // Lectura del fichero
             String linea;
@@ -586,28 +587,36 @@ public class FormularioVista extends javax.swing.JPanel {
     }//GEN-LAST:event_cargarArchivo
 
     private void tiempoServicioCantValoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMouseClicked
-        cambiarCantidadValores();
+
     }//GEN-LAST:event_tiempoServicioCantValoresMouseClicked
 
     private void tiempoServicioCantValoresMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMouseReleased
-        cambiarCantidadValores();
+
     }//GEN-LAST:event_tiempoServicioCantValoresMouseReleased
 
     private void tiempoServicioCantValoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMousePressed
-        cambiarCantidadValores();
+
     }//GEN-LAST:event_tiempoServicioCantValoresMousePressed
 
     private void tiempoServicioCantValoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMouseMoved
-        cambiarCantidadValores();
+
     }//GEN-LAST:event_tiempoServicioCantValoresMouseMoved
 
     private void tiempoServicioCantValoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMouseExited
-        cambiarCantidadValores();
+  
     }//GEN-LAST:event_tiempoServicioCantValoresMouseExited
 
     private void tiempoServicioCantValoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresMouseEntered
-        cambiarCantidadValores();
+
     }//GEN-LAST:event_tiempoServicioCantValoresMouseEntered
+
+    private void tiempoServicioCantValoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tiempoServicioCantValoresStateChanged
+       if(this.tiempoServicioCantValores.isVisible()){
+           cambiarCantidadValores();
+       }
+       this.tiempoServicioCantValores.setVisible(true);
+        
+    }//GEN-LAST:event_tiempoServicioCantValoresStateChanged
 
     public String obtenerCampo(String linea){
         String campoValor;
@@ -660,7 +669,9 @@ public class FormularioVista extends javax.swing.JPanel {
             
             DefaultTableModel tiempoLlegadaModel = (DefaultTableModel) this.tiempoEntreLlegadasTabla.getModel();
             tiempoLlegadaModel.addRow(new Object[]{tiempoLlegadaModel.getRowCount() + 1, tiempo, probabilidad}); 
+            this.tiempoServicioCantValores.setVisible(false);
             this.tiempoServicioCantValores.getModel().setValue(tiempoLlegadaModel.getRowCount());
+            this.tiempoServicioCantValores.setVisible(true);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Archivo invalido", "Error en el formato de tiempo", JOptionPane.ERROR_MESSAGE);
         }

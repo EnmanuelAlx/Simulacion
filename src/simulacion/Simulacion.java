@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.LinkedList;
 import java.util.Queue;
+import vistas.EstadisticasVista;
+import static vistas.InicioVista.mainPanel;
 /**
  *
  * @author Enmanuel
@@ -131,11 +133,23 @@ public class Simulacion {
     
     public void MostrarEstadisticas(){
         cantPromedioClientes();
+        EstadisticasVista estadisticasVista = new EstadisticasVista();
         System.out.println("Cantidad Cientes que no esperan: "+this.cantClientesNoEspera);
+        estadisticasVista.cantClientesNoEsperaLabel.setText(""+this.cantClientesNoEspera);
+        
         System.out.println("Cantidad Clientes que se van sin ser atendidos: "+this.cantClientesNoAtendidos);
+        estadisticasVista.cantClientesNoAtendidosLabel.setText(""+this.cantClientesNoAtendidos);
+
         System.out.println("Probabilidad de esperar: "+(float)this.probEspera);
+        estadisticasVista.probEsperaLabel.setText(""+this.probEspera);
+
         System.out.println("Cantidad Promedio clientes en cola: "+this.cantPromedioClientesCola);
+        estadisticasVista.cantPromedioClientesColaLabel.setText(""+this.cantPromedioClientesCola);
+
         System.out.println("Cantidad Promedio clientes en Sistema: "+this.cantPromedioClientesSistema);
+        estadisticasVista.cantPromedioClientesSistemaLabel.setText(""+this.cantPromedioClientesSistema);
+        
+
         int sumaTotalUsoServer= 0;
         for (Servidor server: servidores) {
             sumaTotalUsoServer+=server.getTiempoUtilizacion();
@@ -152,6 +166,14 @@ public class Simulacion {
         for (Servidor server: servidores) {
             System.out.println("Costo servidor: "+server+" es: "+(((float)server.getTiempoUtilizacion()/(float)server.getCantVecesUsado())*server.getCosto()));
         }
+        
+        
+        
+        estadisticasVista.setSize(800,500);
+        mainPanel.removeAll();
+        mainPanel.add(estadisticasVista);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
     
     public float tiempoPromedioCola(){
