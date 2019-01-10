@@ -48,7 +48,7 @@ public class Simulacion {
     private int tiempoPromedioClienteCola;
     private int tiempoPromedioClienteSistema;
     private int cantClienteCola;
-    
+    private int cantidadTotalTiempoClientesCola;
     ////////Cambiar por ts = tiempo salida y te = tiempo entrada
     private int TS; 
     private int TE;
@@ -86,6 +86,7 @@ public class Simulacion {
         this.tiempoPromedioClienteSistema=0;
         this.cantPromedioClientesSistema=0;
         this.cantClienteCola= 0;
+        this.cantidadTotalTiempoClientesCola = 0;
     }
     
     public int menorDT(){
@@ -125,6 +126,11 @@ public class Simulacion {
                 for (Cliente cliente : colaClientes) {
                     System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
                 }
+                this.cantPromedioClientesSistema+=this.cantClientesSistema*this.tiempoModelo;
+                if(this.colaClientes.size()>0){
+                    this.cantPromedioClientesCola+=this.cantClientesSistema * this.tiempoModelo;
+                }
+                
                 System.out.println("____________________________________________");
             }
             MostrarEstadisticas();
@@ -176,12 +182,24 @@ public class Simulacion {
         mainPanel.repaint();
     }
     
+    public float cantPromedioClientesCola(){
+        return (float)this.cantidadTotalTiempoClientesCola/(float)this.tiempoModelo;
+    }
+    
+    public float cantPromedioClientesSistema(){
+        return this.cantPromedioClientesSistema/this.tiempoModelo;
+    }
+    
+    public float probabilidadEspera(){
+        return this.probEspera = (float)(this.cantClientesSistema - this.cantClientesNoEspera) / (float)this.cantClientesSistema;
+    }
+    
     public float tiempoPromedioCola(){
-        return (float)this.tiempoPromedioClienteCola/this.tiempoSimulacion;
+        return (float)this.tiempoPromedioClienteCola/this.cantClientesSistema;
     }
     
     public float tiempoPromedioSistema(){
-        return (float)this.tiempoPromedioClienteSistema/this.tiempoSimulacion;
+        return (float)this.tiempoPromedioClienteSistema/this.cantClientesSistema;
     }
     
     public void cantPromedioClientes(){
@@ -231,7 +249,6 @@ public class Simulacion {
         if(todosFull){
             Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, this.tiempoModelo);
             this.colaClientes.add(cliente);
-            this.probEspera+= ((float)this.colaClientes.size()/(float)this.cantClientesSistema);
         }
         
         this.TE = generarTE();
@@ -253,7 +270,8 @@ public class Simulacion {
             limpiarServidores();
             Cliente cliente = this.colaClientes.poll();
             cantClienteCola++;
-            tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
+            this.cantidadTotalTiempoClientesCola += (this.tiempoModelo - cliente.getTiempoLlegadaCola());
+            this.tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);

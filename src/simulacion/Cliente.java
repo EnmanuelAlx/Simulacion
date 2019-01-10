@@ -13,10 +13,13 @@ public class Cliente {
     private int tiempoEntrada;
     private int tiempoServicio;
     private int tiempoLlegadaSistema;
+    private int tiempoLlegadaCola;
+  
     public Cliente(int tiempoEntrada, int tiempoServicio, int tiempoLlegadaSistema,int tiempoLlegadaCola) {
         this.tiempoEntrada = tiempoEntrada;
         this.tiempoServicio = tiempoServicio;
         this.tiempoLlegadaSistema = tiempoLlegadaSistema;
+        this.tiempoLlegadaCola = tiempoLlegadaCola;
     }
 
     public int getTiempoEntrada() {
@@ -45,4 +48,11 @@ public class Cliente {
     
     
 
+    public int getTiempoLlegadaCola() {
+        return tiempoLlegadaCola;
+    }
+
+    public void setTiempoLlegadaCola(int tiempoLlegadaCola) {
+        this.tiempoLlegadaCola = tiempoLlegadaCola;
+    }
 }
