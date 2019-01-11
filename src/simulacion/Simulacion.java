@@ -10,7 +10,9 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.LinkedList;
 import java.util.Queue;
+import javax.swing.table.DefaultTableModel;
 import vistas.EstadisticasVista;
+import vistas.TablaEventosVista;
 import static vistas.InicioVista.mainPanel;
 /**
  *
@@ -52,6 +54,8 @@ public class Simulacion {
     ////////Cambiar por ts = tiempo salida y te = tiempo entrada
     private int TS; 
     private int TE;
+    public static TablaEventosVista tablaEventosVista;
+    public DefaultTableModel tablaEventosModel;
     ///////////////////////////////////////////////////////////
     private ArrayList<Servidor> servidores;
     
@@ -87,6 +91,8 @@ public class Simulacion {
         this.cantPromedioClientesSistema=0;
         this.cantClienteCola= 0;
         this.cantidadTotalTiempoClientesCola = 0;
+        this.tablaEventosVista = new TablaEventosVista();
+        tablaEventosModel = (DefaultTableModel) tablaEventosVista.tablaEventos.getModel();
     }
     
     public int menorDT(){
@@ -157,20 +163,47 @@ public class Simulacion {
         
 
         int sumaTotalUsoServer= 0;
+        
         for (Servidor server: servidores) {
             sumaTotalUsoServer+=server.getTiempoUtilizacion();
         }
+        int i = 1;
+        DefaultTableModel porcentajeUtilizacionTabla = (DefaultTableModel) estadisticasVista.porcentajeUtilizacionTabla.getModel();
+        DefaultTableModel costoServidorTabla = (DefaultTableModel) estadisticasVista.costoServidorTabla.getModel();
+
         for (Servidor server: servidores) {
             System.out.println("Porcentaje de utilizacion de servidor: "+server+" es: "+((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100);
+            porcentajeUtilizacionTabla.addRow(new Object[]{i, ((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100});
+            i++;
         }
+        
         System.out.println("Utilizacion general: "+(float)sumaTotalUsoServer/(float)servidores.size());
+        estadisticasVista.utilizacionGeneralLabel.setText(""+(float)sumaTotalUsoServer/(float)servidores.size());
+        
+
+        
         System.out.println("Tiempo promedio de un cliente en cola: "+tiempoPromedioCola());
+        estadisticasVista.tiempoPromClienteColaLabel.setText(""+tiempoPromedioCola());        
+        
         System.out.println("Tiempo promedio de un cliente en el sistema: "+tiempoPromedioSistema());
+        estadisticasVista.tiempoPromClienteSistema.setText(""+tiempoPromedioSistema());        
+
+        
         System.out.println("Costo promedio de espera: "+tiempoPromedioCola()*this.costoEspera);
-        if (cantClienteCola > 0)
+        estadisticasVista.costoPromEsperaLabel.setText(""+tiempoPromedioCola()*this.costoEspera);        
+
+        
+        if (cantClienteCola > 0){
             System.out.println("Tiempo promedio de espera del cliente que hace cola: "+this.tiempoPromedioClienteCola/cantClienteCola);
+            estadisticasVista.clienteHaceColaLabel.setText(""+this.tiempoPromedioClienteCola/cantClienteCola);        
+           
+        }
+        
+        i=1;
         for (Servidor server: servidores) {
             System.out.println("Costo servidor: "+server+" es: "+(((float)server.getTiempoUtilizacion()/(float)server.getCantVecesUsado())*server.getCosto()));
+            costoServidorTabla.addRow(new Object[]{i, (((float)server.getTiempoUtilizacion()/(float)server.getCantVecesUsado())*server.getCosto())});
+            i++;
         }
         
         
@@ -260,6 +293,10 @@ public class Simulacion {
             System.out.println("Server vacio: "+server.isVacio()+" Tiempo salida: "+server.getSalida());
         }
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
+        
+        
+        
+        tablaEventosModel.addRow(new Object[]{"Llegada",this.tiempoModelo,this.colaClientes.size(),"Por hacer",this.AT,this.DT});
     }
     
     public void salidaCliente(){
@@ -293,6 +330,8 @@ public class Simulacion {
             System.out.println("Server "+server.isVacio()+" Tiempo salida: "+server.getSalida());
         }
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
+        tablaEventosModel.addRow(new Object[]{"Salida",this.tiempoModelo,this.colaClientes.size(),"Por hacer",this.AT,this.DT});
+
     }
     
     

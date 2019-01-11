@@ -57,7 +57,6 @@ public class FormularioVista extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tiempoServicioCantValores = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
@@ -70,7 +69,6 @@ public class FormularioVista extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        verTablaCheck = new javax.swing.JCheckBox();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tiempoServicioTabla = new javax.swing.JTable();
@@ -151,15 +149,10 @@ public class FormularioVista extends javax.swing.JPanel {
         jLabel4.setText("1.- Selecciona la unidad de tiempo ");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 290, -1));
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("10.- Visualizar tabla de eventos");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 250, 30));
-
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("9.- Tiempo de servicio y probabilidad");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 340, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 340, -1));
 
         tiempoServicioCantValores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tiempoServicioCantValores.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -239,14 +232,6 @@ public class FormularioVista extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 20, 370));
 
-        verTablaCheck.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        verTablaCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verTablaCheckActionPerformed(evt);
-            }
-        });
-        add(verTablaCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, 30, 30));
-
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -263,7 +248,7 @@ public class FormularioVista extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tiempoServicioTabla);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, 310, 80));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 310, 80));
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
@@ -371,7 +356,7 @@ public class FormularioVista extends javax.swing.JPanel {
         jLabel21.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("8.- Tiempo de llegada y probabilidad");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 340, -1));
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 340, -1));
 
         tiempoEntreLlegadasTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -383,16 +368,12 @@ public class FormularioVista extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tiempoEntreLlegadasTabla);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 310, 80));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 310, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void unidadTiempoSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadTiempoSelectorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unidadTiempoSelectorActionPerformed
-
-    private void verTablaCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTablaCheckActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verTablaCheckActionPerformed
    
     
     private void iniciarSimulacion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSimulacion
@@ -447,12 +428,7 @@ public class FormularioVista extends javax.swing.JPanel {
             servidores.add(servidor);
             }
             
-            if(this.verTablaCheck.isSelected()){
-                tablaEventos = 1;
-            }
-            else{
-                tablaEventos = 2;
-            }
+           
         }catch(Exception e){
             System.err.println("ERRORR:  " + e );   
         }
@@ -738,7 +714,6 @@ public class FormularioVista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -752,7 +727,6 @@ public class FormularioVista extends javax.swing.JPanel {
     public javax.swing.JTable tiempoServicioTabla;
     private javax.swing.JTextField tiempoSimulacionTextField;
     public javax.swing.JComboBox<String> unidadTiempoSelector;
-    public javax.swing.JCheckBox verTablaCheck;
     public javax.swing.JPanel volverBoton;
     // End of variables declaration//GEN-END:variables
 }

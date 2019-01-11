@@ -1,10 +1,10 @@
 unidad de tiempo: dias
-tiempo de simulacion: 500
+tiempo de simulacion: 50
 cantidad de clientes: 999
 servidores: 2
 costo servidores: 5
 costo de espera: 5
-llegada: tiempo: 2, probabilidad: 0.1
-llegada: tiempo: 10, probabilidad: 0.9
-servicio: tiempo: 1, probabilidad: 0.2
-servicio: tiempo: 55, probabilidad: 0.8
+llegada: tiempo: 3, probabilidad: 0.6
+llegada: tiempo: 5, probabilidad: 0.4
+servicio: tiempo: 2, probabilidad: 0.6
+servicio: tiempo: 4, probabilidad: 0.4
