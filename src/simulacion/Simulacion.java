@@ -124,20 +124,27 @@ public class Simulacion {
 
             switch ((int)this.tiempoSimulacion) {
             case 3:  
+                System.out.println("Horas");
                 this.tiempoTotalSimulacion = 60 * (int)this.tiempoTotalSimulacion;
                 break;
             case 4: 
-                this.tiempoTotalSimulacion = 1440* (int)this.tiempoTotalSimulacion;
+                System.out.println("dias");
+                //Zaqui gei
+                this.tiempoTotalSimulacion = 210* (int)this.tiempoTotalSimulacion;
                 break;
             case 5: 
-                this.tiempoTotalSimulacion = 10080* (int)this.tiempoTotalSimulacion;
+                System.out.println("semanas");
+
+                this.tiempoTotalSimulacion = 5 * (int)this.tiempoTotalSimulacion * 210;
                 break;
             case 6: 
-                this.tiempoTotalSimulacion = 43800* (int)this.tiempoTotalSimulacion;
-
+                System.out.println("meses");
+                this.tiempoTotalSimulacion = 23 * (int)this.tiempoTotalSimulacion * 210;
                 break;
             case 7: 
-                this.tiempoTotalSimulacion = 525600* (int)this.tiempoTotalSimulacion;
+                System.out.println("años");
+                
+                this.tiempoTotalSimulacion = 276 * (int)this.tiempoTotalSimulacion * 210;
                 break;
         }
             
