@@ -123,6 +123,11 @@ public class Simulacion {
             System.out.println("Tiempo total es = "+ this.tiempoTotalSimulacion);
 
             switch ((int)this.tiempoSimulacion) {
+            case 2:
+                System.out.println("Minutos");
+                this.tiempoTotalSimulacion = (int)this.tiempoTotalSimulacion;
+                break;
+                
             case 3:  
                 System.out.println("Horas");
                 this.tiempoTotalSimulacion = 60 * (int)this.tiempoTotalSimulacion;
