@@ -119,6 +119,29 @@ public class Simulacion {
     
     public void play(){
 //        for (int i = 0; i < this.tiempoTotalSimulacion; i++) {
+            System.out.println("Unidad de tiempo es = "+ this.tiempoSimulacion);
+            System.out.println("Tiempo total es = "+ this.tiempoTotalSimulacion);
+
+            switch ((int)this.tiempoSimulacion) {
+            case 3:  
+                this.tiempoTotalSimulacion = 60 * (int)this.tiempoTotalSimulacion;
+                break;
+            case 4: 
+                this.tiempoTotalSimulacion = 1440* (int)this.tiempoTotalSimulacion;
+                break;
+            case 5: 
+                this.tiempoTotalSimulacion = 10080* (int)this.tiempoTotalSimulacion;
+                break;
+            case 6: 
+                this.tiempoTotalSimulacion = 43800* (int)this.tiempoTotalSimulacion;
+
+                break;
+            case 7: 
+                this.tiempoTotalSimulacion = 525600* (int)this.tiempoTotalSimulacion;
+                break;
+        }
+            
+            System.out.println("Tiempo total de simulacion!! "+this.tiempoTotalSimulacion);
             while (this.tiempoTotalSimulacion>=this.tiempoModelo) {
                 this.cantEventos++;
                 this.DT = menorDT();
@@ -152,14 +175,14 @@ public class Simulacion {
         System.out.println("Cantidad Clientes que se van sin ser atendidos: "+this.cantClientesNoAtendidos);
         estadisticasVista.cantClientesNoAtendidosLabel.setText(""+this.cantClientesNoAtendidos);
 
-        System.out.println("Probabilidad de esperar: "+(float)this.probEspera);
-        estadisticasVista.probEsperaLabel.setText(""+this.probEspera);
+        System.out.println("Probabilidad de esperar: "+probabilidadEspera());
+        estadisticasVista.probEsperaLabel.setText(""+probabilidadEspera());
 
-        System.out.println("Cantidad Promedio clientes en cola: "+this.cantPromedioClientesCola);
-        estadisticasVista.cantPromedioClientesColaLabel.setText(""+this.cantPromedioClientesCola);
+        System.out.println("Cantidad Promedio clientes en cola: "+cantPromedioClientesCola());
+        estadisticasVista.cantPromedioClientesColaLabel.setText(""+cantPromedioClientesCola());
 
-        System.out.println("Cantidad Promedio clientes en Sistema: "+this.cantPromedioClientesSistema);
-        estadisticasVista.cantPromedioClientesSistemaLabel.setText(""+this.cantPromedioClientesSistema);
+        System.out.println("Cantidad Promedio clientes en Sistema: "+cantPromedioClientesSistema());
+        estadisticasVista.cantPromedioClientesSistemaLabel.setText(""+cantPromedioClientesSistema());
         
 
         int sumaTotalUsoServer= 0;
@@ -173,7 +196,7 @@ public class Simulacion {
 
         for (Servidor server: servidores) {
             System.out.println("Porcentaje de utilizacion de servidor: "+server+" es: "+((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100);
-            porcentajeUtilizacionTabla.addRow(new Object[]{i, ((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100});
+            porcentajeUtilizacionTabla.addRow(new Object[]{i, ((float)server.getTiempoUtilizacion()/(float)this.tiempoSimulacion)*100});
             i++;
         }
         

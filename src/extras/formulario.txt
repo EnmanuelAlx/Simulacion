@@ -1,5 +1,5 @@
 unidad de tiempo: dias
-tiempo de simulacion: 50
+tiempo de simulacion: 5
 cantidad de clientes: 999
 servidores: 2
 costo servidores: 5
