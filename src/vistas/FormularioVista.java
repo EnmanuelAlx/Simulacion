@@ -466,24 +466,27 @@ public class FormularioVista extends javax.swing.JPanel {
         }
         
         
-        
-        
-        
-        
-        Simulacion simulacion = new Simulacion(
-            tiempoSimulacion,
-            cantClientes,
-            tiemposLlegada,
-            tiemposServicios,
-            costoServidor,
-            costoEspera,
-            tablaEventos,
-            cantServidores,
-            false,
-            tiempoTotal, 
-            servidores);
-        
-        simulacion.play();
+        if( (cantClientes < 2) || (tiempoSimulacion == 0) || (tiemposLlegada.isEmpty()) || (tiemposServicios.isEmpty()) || (costoServidor == 0)|| (costoEspera== 0) || (cantServidores < 1)){
+            
+            JOptionPane.showMessageDialog(null, "Llene correctamente los campos", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }else{
+            
+            Simulacion simulacion = new Simulacion(
+                tiempoSimulacion,
+                cantClientes,
+                tiemposLlegada,
+                tiemposServicios,
+                costoServidor,
+                costoEspera,
+                tablaEventos,
+                cantServidores,
+                false,
+                tiempoTotal, 
+                servidores);
+
+            simulacion.play();
+        }
         
         
         
@@ -618,7 +621,7 @@ public class FormularioVista extends javax.swing.JPanel {
                         break;
                     
                     case "dias":
-                        this.unidadTiempoSelector.getModel().setSelectedItem("Dias");
+                        this.unidadTiempoSelector.getModel().setSelectedItem("Días");
                         break;
                    
                     case "semanas":

@@ -7,7 +7,7 @@ package vistas;
 
 import static vistas.InicioVista.mainPanel;
 import simulacion.Simulacion;
-
+import vistas.FormularioVista;
 /**
  *
  * @author Jose Andres
@@ -275,6 +275,11 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Volver al formulario");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarFormulario(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -319,12 +324,22 @@ public class EstadisticasVista extends javax.swing.JPanel {
     
         //TablaEventosVista tablaVista = new TablaEventosVista();
         
-                simulacion.Simulacion.tablaEventosVista.setSize(800,500);
-                mainPanel.removeAll();
-                mainPanel.add(simulacion.Simulacion.tablaEventosVista);
-                mainPanel.revalidate();
-                mainPanel.repaint();
+        simulacion.Simulacion.tablaEventosVista.setSize(800,500);
+        mainPanel.removeAll();
+        mainPanel.add(simulacion.Simulacion.tablaEventosVista);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }//GEN-LAST:event_mostrarTablaEventos
+
+    private void mostrarFormulario(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarFormulario
+        FormularioVista formulario = new FormularioVista();
+        formulario.setSize(800,500);
+        mainPanel.removeAll();
+        mainPanel.add(formulario);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        
+    }//GEN-LAST:event_mostrarFormulario
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
