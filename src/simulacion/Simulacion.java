@@ -111,7 +111,8 @@ public class Simulacion {
         for (Servidor server : servidores) {
             if(!server.isVacio() && server.getSalida()==this.tiempoModelo){
                 Cliente cliente = server.getCliente();
-                this.tiempoPromedioClienteSistema = this.tiempoModelo - cliente.getTiempoEntrada();
+                this.tiempoPromedioClienteSistema += this.tiempoModelo - cliente.getTiempoLlegadaSistema();
+                System.out.println("this.tiempoPromedioClienteSistema " + this.tiempoPromedioClienteSistema);
                 server.setVacio(true);
                 server.setCliente(null);
                 server.setSalida(99999999);
@@ -136,7 +137,6 @@ public class Simulacion {
                 break;
             case 4: 
                 System.out.println("dias");
-                //Zaqui gei
                 this.tiempoTotalSimulacion = 210* (int)this.tiempoTotalSimulacion;
                 break;
             case 5: 
@@ -233,10 +233,7 @@ public class Simulacion {
             i++;
         }
         
-        System.out.println("Utilizacion general: "+(float)sumaTotalUsoServer/(float)servidores.size());
-        this.estadisticasVista.utilizacionGeneralLabel.setText(""+(float)sumaTotalUsoServer/(float)servidores.size());
-        
-
+    
         
         System.out.println("Tiempo promedio de un cliente en cola: "+tiempoPromedioCola());
         this.estadisticasVista.tiempoPromClienteColaLabel.setText(""+tiempoPromedioCola());        

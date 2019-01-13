@@ -38,7 +38,6 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -55,7 +54,6 @@ public class EstadisticasVista extends javax.swing.JPanel {
         tiempoPromClienteColaLabel = new javax.swing.JLabel();
         clienteHaceColaLabel = new javax.swing.JLabel();
         probEsperaLabel = new javax.swing.JLabel();
-        utilizacionGeneralLabel = new javax.swing.JLabel();
         cantClientesNoAtendidosLabel = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         costoPromEsperaLabel = new javax.swing.JLabel();
@@ -97,13 +95,13 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Tiempo promedio de un cliente en el sistema: ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 330, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 330, -1));
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Cantidad Cientes que no esperan:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 250, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 250, -1));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -128,12 +126,6 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Cantidad Promedio de clientes en sistema: ");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 320, -1));
-
-        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setText("Utilizacion general: ");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 160, -1));
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
@@ -209,7 +201,7 @@ public class EstadisticasVista extends javax.swing.JPanel {
         tiempoPromClienteSistema.setForeground(new java.awt.Color(102, 102, 102));
         tiempoPromClienteSistema.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         tiempoPromClienteSistema.setText("00");
-        add(tiempoPromClienteSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 70, -1));
+        add(tiempoPromClienteSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 70, -1));
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
@@ -227,7 +219,7 @@ public class EstadisticasVista extends javax.swing.JPanel {
         cantClientesNoEsperaLabel.setForeground(new java.awt.Color(102, 102, 102));
         cantClientesNoEsperaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cantClientesNoEsperaLabel.setText("00");
-        add(cantClientesNoEsperaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 70, -1));
+        add(cantClientesNoEsperaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 70, -1));
 
         cantPromedioClientesColaLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         cantPromedioClientesColaLabel.setForeground(new java.awt.Color(102, 102, 102));
@@ -259,12 +251,6 @@ public class EstadisticasVista extends javax.swing.JPanel {
         probEsperaLabel.setText("00");
         add(probEsperaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 70, -1));
 
-        utilizacionGeneralLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        utilizacionGeneralLabel.setForeground(new java.awt.Color(102, 102, 102));
-        utilizacionGeneralLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        utilizacionGeneralLabel.setText("00");
-        add(utilizacionGeneralLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 90, -1));
-
         cantClientesNoAtendidosLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         cantClientesNoAtendidosLabel.setForeground(new java.awt.Color(102, 102, 102));
         cantClientesNoAtendidosLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -275,13 +261,13 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Costo promedio de espera: ");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 210, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 210, -1));
 
         costoPromEsperaLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         costoPromEsperaLabel.setForeground(new java.awt.Color(102, 102, 102));
         costoPromEsperaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         costoPromEsperaLabel.setText("00");
-        add(costoPromEsperaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 70, -1));
+        add(costoPromEsperaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 70, -1));
 
         jPanel2.setBackground(new java.awt.Color(125, 202, 131));
 
@@ -365,7 +351,6 @@ public class EstadisticasVista extends javax.swing.JPanel {
     public static javax.swing.JLabel costoPromEsperaLabel;
     public static javax.swing.JTable costoServidorTabla;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -389,6 +374,5 @@ public class EstadisticasVista extends javax.swing.JPanel {
     public static javax.swing.JLabel probEsperaLabel;
     public static javax.swing.JLabel tiempoPromClienteColaLabel;
     public static javax.swing.JLabel tiempoPromClienteSistema;
-    public static javax.swing.JLabel utilizacionGeneralLabel;
     // End of variables declaration//GEN-END:variables
 }
