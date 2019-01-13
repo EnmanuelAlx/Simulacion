@@ -90,7 +90,7 @@ public class TablaEventosVista extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaEventos);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 340));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 340));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 

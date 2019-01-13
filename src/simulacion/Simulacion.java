@@ -325,14 +325,24 @@ public class Simulacion {
         limpiarServidores();
         cantPromeClientes(TMant);
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
+        String statusServer = "";
+        String serverVacio="";
+        int i =1;
         for (Servidor server : servidores) {
             System.out.println("Server vacio: "+server.isVacio()+" Tiempo salida: "+server.getSalida());
+            if(server.isVacio()){
+                serverVacio = "vacio";
+            }else{
+                serverVacio = "lleno";
+            }
+            statusServer = statusServer + "Servidor " + i + ":" + serverVacio + ". ";
+            i++;
         }
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
         
         
         
-        tablaEventosModel.addRow(new Object[]{"Llegada",this.tiempoModelo,this.colaClientes.size(),"Por hacer",this.AT,this.DT});
+        tablaEventosModel.addRow(new Object[]{"Llegada",this.tiempoModelo,this.colaClientes.size(), statusServer,this.AT,this.DT});
     }
     
     public void salidaCliente(){
@@ -362,11 +372,21 @@ public class Simulacion {
         }
         cantPromeClientes(TMant);
         System.out.println("TM: "+this.tiempoModelo+" WL: "+this.colaClientes.size()+" AT: "+this.AT+" DT: "+this.DT);
+        String statusServer = "";
+        int i =1;
+        String serverVacio ="";
         for (Servidor server : servidores) {
             System.out.println("Server "+server.isVacio()+" Tiempo salida: "+server.getSalida());
+            if(server.isVacio()){
+                 serverVacio = "vacio";
+             }else{
+                 serverVacio = "lleno";
+             }
+            statusServer = statusServer + "Servidor " + i + ":" + serverVacio + ". ";
+            i++;
         }
         System.out.println("TE: "+this.TE+ " TS: "+this.TS);
-        tablaEventosModel.addRow(new Object[]{"Salida",this.tiempoModelo,this.colaClientes.size(),"Por hacer",this.AT,this.DT});
+        tablaEventosModel.addRow(new Object[]{"Salida",this.tiempoModelo,this.colaClientes.size(),statusServer,this.AT,this.DT});
 
     }
     

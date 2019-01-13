@@ -27,6 +27,7 @@ public class InicioVista extends javax.swing.JFrame {
     
     public InicioVista() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
         this.panelParte1.addMouseListener(new MouseListener() {
             public void mousePressed(MouseEvent me) {
@@ -47,21 +48,6 @@ public class InicioVista extends javax.swing.JFrame {
                 me.getComponent().setBackground(Color.white);
                 topPart1.setForeground(Color.black);
                 numeroPart1.setForeground(Color.black);
-            }
-            public void mouseClicked(MouseEvent me) { }
-        });
-        this.panelParte2.addMouseListener(new MouseListener() {
-            public void mousePressed(MouseEvent me) { }
-            public void mouseReleased(MouseEvent me) { }
-            public void mouseEntered(MouseEvent me) { 
-                me.getComponent().setBackground(new Color(102,153,255));
-                topPart2.setForeground(Color.white);
-                numeroPart2.setForeground(Color.white);
-            }
-            public void mouseExited(MouseEvent me) { 
-                me.getComponent().setBackground(Color.white);
-                topPart2.setForeground(Color.black);
-                numeroPart2.setForeground(Color.black);
             }
             public void mouseClicked(MouseEvent me) { }
         });
@@ -89,13 +75,9 @@ public class InicioVista extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         HomePanel = new javax.swing.JPanel();
-        panelParte2 = new javax.swing.JPanel();
-        numeroPart2 = new javax.swing.JLabel();
-        topPart2 = new javax.swing.JLabel();
         panelParte1 = new javax.swing.JPanel();
         topPart1 = new javax.swing.JLabel();
         numeroPart1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         salirBoton = new javax.swing.JPanel();
@@ -103,7 +85,6 @@ public class InicioVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(800, 550));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -111,95 +92,54 @@ public class InicioVista extends javax.swing.JFrame {
         HomePanel.setMinimumSize(new java.awt.Dimension(800, 500));
         HomePanel.setPreferredSize(new java.awt.Dimension(800, 550));
 
-        panelParte2.setBackground(new java.awt.Color(255, 255, 255));
-
-        numeroPart2.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
-        numeroPart2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroPart2.setText("II");
-
-        topPart2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 22)); // NOI18N
-        topPart2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        topPart2.setText("PARTE");
-
-        javax.swing.GroupLayout panelParte2Layout = new javax.swing.GroupLayout(panelParte2);
-        panelParte2.setLayout(panelParte2Layout);
-        panelParte2Layout.setHorizontalGroup(
-            panelParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelParte2Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(panelParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numeroPart2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(topPart2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addGap(47, 47, 47))
-        );
-        panelParte2Layout.setVerticalGroup(
-            panelParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelParte2Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(topPart2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(numeroPart2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         panelParte1.setBackground(new java.awt.Color(255, 255, 255));
 
         topPart1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 22)); // NOI18N
         topPart1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        topPart1.setText("PARTE");
+        topPart1.setText("Iniciar Simulación");
 
         numeroPart1.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
         numeroPart1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroPart1.setText("I");
+        numeroPart1.setText("Iniciar");
 
         javax.swing.GroupLayout panelParte1Layout = new javax.swing.GroupLayout(panelParte1);
         panelParte1.setLayout(panelParte1Layout);
         panelParte1Layout.setHorizontalGroup(
             panelParte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelParte1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(panelParte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numeroPart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(topPart1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE)
+                .addComponent(topPart1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+            .addGroup(panelParte1Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(numeroPart1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         panelParte1Layout.setVerticalGroup(
             panelParte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelParte1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(topPart1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(numeroPart1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
-
-        jSeparator1.setBackground(new java.awt.Color(51, 51, 51));
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout HomePanelLayout = new javax.swing.GroupLayout(HomePanel);
         HomePanel.setLayout(HomePanelLayout);
         HomePanelLayout.setHorizontalGroup(
             HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HomePanelLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomePanelLayout.createSequentialGroup()
+                .addContainerGap(188, Short.MAX_VALUE)
                 .addComponent(panelParte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelParte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addGap(144, 144, 144))
         );
         HomePanelLayout.setVerticalGroup(
             HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomePanelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelParte1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelParte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(151, 151, 151))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
+                .addGap(158, 158, 158)
+                .addComponent(panelParte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
@@ -324,6 +264,7 @@ public class InicioVista extends javax.swing.JFrame {
             public void run() {
                 new InicioVista().setVisible(true);
                 
+                
             }
         });
     }
@@ -333,14 +274,10 @@ public class InicioVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JPanel mainPanel;
     public javax.swing.JLabel numeroPart1;
-    public javax.swing.JLabel numeroPart2;
     public javax.swing.JPanel panelParte1;
-    public javax.swing.JPanel panelParte2;
     public javax.swing.JPanel salirBoton;
-    public javax.swing.JLabel topPart1;
-    public javax.swing.JLabel topPart2;
+    private javax.swing.JLabel topPart1;
     // End of variables declaration//GEN-END:variables
 }
