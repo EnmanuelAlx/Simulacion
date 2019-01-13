@@ -120,7 +120,11 @@ public class TablaEventosVista extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverEstadisticas(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverEstadisticas
-
+        simulacion.Simulacion.estadisticasVista.setSize(800,500);
+        mainPanel.removeAll();
+        mainPanel.add(simulacion.Simulacion.estadisticasVista);
+        mainPanel.revalidate();
+        mainPanel.repaint();
        
     }//GEN-LAST:event_volverEstadisticas
 

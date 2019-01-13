@@ -54,6 +54,7 @@ public class Simulacion {
     ////////Cambiar por ts = tiempo salida y te = tiempo entrada
     private int TS; 
     private int TE;
+    public static EstadisticasVista estadisticasVista;
     public static TablaEventosVista tablaEventosVista;
     public DefaultTableModel tablaEventosModel;
     ///////////////////////////////////////////////////////////
@@ -91,6 +92,7 @@ public class Simulacion {
         this.cantPromedioClientesSistema=0;
         this.cantClienteCola= 0;
         this.cantidadTotalTiempoClientesCola = 0;
+        this.estadisticasVista = new EstadisticasVista();
         this.tablaEventosVista = new TablaEventosVista();
         tablaEventosModel = (DefaultTableModel) tablaEventosVista.tablaEventos.getModel();
     }
@@ -180,21 +182,20 @@ public class Simulacion {
     
     public void MostrarEstadisticas(){
         cantPromedioClientes();
-        EstadisticasVista estadisticasVista = new EstadisticasVista();
         System.out.println("Cantidad Cientes que no esperan: "+this.cantClientesNoEspera);
-        estadisticasVista.cantClientesNoEsperaLabel.setText(""+this.cantClientesNoEspera);
+        this.estadisticasVista.cantClientesNoEsperaLabel.setText(""+this.cantClientesNoEspera);
         
         System.out.println("Cantidad Clientes que se van sin ser atendidos: "+this.cantClientesNoAtendidos);
-        estadisticasVista.cantClientesNoAtendidosLabel.setText(""+this.cantClientesNoAtendidos);
+        this.estadisticasVista.cantClientesNoAtendidosLabel.setText(""+this.cantClientesNoAtendidos);
 
         System.out.println("Probabilidad de esperar: "+probabilidadEspera());
-        estadisticasVista.probEsperaLabel.setText(""+probabilidadEspera());
+        this.estadisticasVista.probEsperaLabel.setText(""+probabilidadEspera());
 
         System.out.println("Cantidad Promedio clientes en cola: "+cantPromedioClientesCola());
-        estadisticasVista.cantPromedioClientesColaLabel.setText(""+cantPromedioClientesCola());
+        this.estadisticasVista.cantPromedioClientesColaLabel.setText(""+cantPromedioClientesCola());
 
         System.out.println("Cantidad Promedio clientes en Sistema: "+cantPromedioClientesSistema());
-        estadisticasVista.cantPromedioClientesSistemaLabel.setText(""+cantPromedioClientesSistema());
+        this.estadisticasVista.cantPromedioClientesSistemaLabel.setText(""+cantPromedioClientesSistema());
         
 
         int sumaTotalUsoServer= 0;
@@ -203,34 +204,34 @@ public class Simulacion {
             sumaTotalUsoServer+=server.getTiempoUtilizacion();
         }
         int i = 1;
-        DefaultTableModel porcentajeUtilizacionTabla = (DefaultTableModel) estadisticasVista.porcentajeUtilizacionTabla.getModel();
-        DefaultTableModel costoServidorTabla = (DefaultTableModel) estadisticasVista.costoServidorTabla.getModel();
+        DefaultTableModel porcentajeUtilizacionTabla = (DefaultTableModel) this.estadisticasVista.porcentajeUtilizacionTabla.getModel();
+        DefaultTableModel costoServidorTabla = (DefaultTableModel) this.estadisticasVista.costoServidorTabla.getModel();
 
         for (Servidor server: servidores) {
             System.out.println("Porcentaje de utilizacion de servidor: "+server+" es: "+((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100);
-            porcentajeUtilizacionTabla.addRow(new Object[]{i, ((float)server.getTiempoUtilizacion()/(float)this.tiempoSimulacion)*100});
+            porcentajeUtilizacionTabla.addRow(new Object[]{i, ((float)server.getTiempoUtilizacion()/(float)sumaTotalUsoServer)*100});
             i++;
         }
         
         System.out.println("Utilizacion general: "+(float)sumaTotalUsoServer/(float)servidores.size());
-        estadisticasVista.utilizacionGeneralLabel.setText(""+(float)sumaTotalUsoServer/(float)servidores.size());
+        this.estadisticasVista.utilizacionGeneralLabel.setText(""+(float)sumaTotalUsoServer/(float)servidores.size());
         
 
         
         System.out.println("Tiempo promedio de un cliente en cola: "+tiempoPromedioCola());
-        estadisticasVista.tiempoPromClienteColaLabel.setText(""+tiempoPromedioCola());        
+        this.estadisticasVista.tiempoPromClienteColaLabel.setText(""+tiempoPromedioCola());        
         
         System.out.println("Tiempo promedio de un cliente en el sistema: "+tiempoPromedioSistema());
-        estadisticasVista.tiempoPromClienteSistema.setText(""+tiempoPromedioSistema());        
+        this.estadisticasVista.tiempoPromClienteSistema.setText(""+tiempoPromedioSistema());        
 
         
         System.out.println("Costo promedio de espera: "+tiempoPromedioCola()*this.costoEspera);
-        estadisticasVista.costoPromEsperaLabel.setText(""+tiempoPromedioCola()*this.costoEspera);        
+        this.estadisticasVista.costoPromEsperaLabel.setText(""+tiempoPromedioCola()*this.costoEspera);        
 
         
         if (cantClienteCola > 0){
             System.out.println("Tiempo promedio de espera del cliente que hace cola: "+this.tiempoPromedioClienteCola/cantClienteCola);
-            estadisticasVista.clienteHaceColaLabel.setText(""+this.tiempoPromedioClienteCola/cantClienteCola);        
+            this.estadisticasVista.clienteHaceColaLabel.setText(""+this.tiempoPromedioClienteCola/cantClienteCola);        
            
         }
         
@@ -243,9 +244,9 @@ public class Simulacion {
         
         
         
-        estadisticasVista.setSize(800,500);
+        this.estadisticasVista.setSize(800,500);
         mainPanel.removeAll();
-        mainPanel.add(estadisticasVista);
+        mainPanel.add(this.estadisticasVista);
         mainPanel.revalidate();
         mainPanel.repaint();
     }
