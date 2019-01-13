@@ -373,12 +373,12 @@ public class Simulacion {
     
     public int generarTS(){
         Random rand = new Random();
-        return getTiempo(rand.nextInt(100), this.tiempoServicios);
+        return getTiempo(rand.nextInt(99), this.tiempoServicios);
     }
     
     public int generarTE(){
         Random rand = new Random();
-        return getTiempo(rand.nextInt(100), this.tiemposLlegada);
+        return getTiempo(rand.nextInt(99), this.tiemposLlegada);
     }
     
     public void incrementAT(int tiempoEntrada){
@@ -414,7 +414,7 @@ public class Simulacion {
                 return item.getValor();
             }
         }
-        return -1;
+        return 1;
     }
 
     public int getTiempoLlegada() {
