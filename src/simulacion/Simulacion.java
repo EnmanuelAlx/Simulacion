@@ -157,6 +157,7 @@ public class Simulacion {
             
             System.out.println("Tiempo total de simulacion!! "+this.tiempoTotalSimulacion);
             while (this.tiempoTotalSimulacion>=this.tiempoModelo) {
+                System.out.println("Cant clientes en el sistema = " + this.cantClientesSistema);
                 this.cantEventos++;
                 this.DT = menorDT();
                 if(this.AT<this.DT){
@@ -176,6 +177,25 @@ public class Simulacion {
                 
                 System.out.println("____________________________________________");
             }
+            
+            while(this.colaClientes.size()>0){
+                System.out.println("Cant clientes en el sistema = " + this.cantClientesSistema);
+
+                this.DT = menorDT();
+                salidaCliente();
+                for (Cliente cliente : colaClientes) {
+                   System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
+                }
+                this.cantPromedioClientesSistema+=this.cantClientesSistema*this.tiempoModelo;
+                if(this.colaClientes.size()>0){
+                    this.cantPromedioClientesCola+=this.cantClientesSistema * this.tiempoModelo;
+                }
+
+                System.out.println("_______________________________");
+
+            }
+            
+            
             MostrarEstadisticas();
 //        }
     }
@@ -344,7 +364,7 @@ public class Simulacion {
             Cliente cliente = this.colaClientes.poll();
             cantClienteCola++;
             this.cantidadTotalTiempoClientesCola += (this.tiempoModelo - cliente.getTiempoLlegadaCola());
-            this.tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaSistema());
+            this.tiempoPromedioClienteCola += (this.tiempoModelo - cliente.getTiempoLlegadaCola());
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);
