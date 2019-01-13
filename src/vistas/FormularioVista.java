@@ -418,7 +418,7 @@ public class FormularioVista extends javax.swing.JPanel {
         
         try{
             tiempoTotal = Float.parseFloat(this.tiempoSimulacionTextField.getText());
-            cantClientes = Integer.parseInt(this.cantidadServidoresSelector.getModel().getValue().toString());
+            cantClientes = Integer.parseInt(this.clientesPermitidosSelector.getModel().getValue().toString());
             costoServidor = Float.parseFloat(this.costoServidorTextField.getText());
             costoEspera = Float.parseFloat(this.costoEsperaTextField.getText());
             cantServidores = Integer.parseInt(this.cantidadServidoresSelector.getModel().getValue().toString());
