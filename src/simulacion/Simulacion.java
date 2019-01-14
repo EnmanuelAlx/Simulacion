@@ -136,21 +136,21 @@ public class Simulacion {
                 break;
             case 4: 
                 System.out.println("dias");
-                this.tiempoTotalSimulacion = 210* (int)this.tiempoTotalSimulacion;
+                this.tiempoTotalSimulacion = 150* (int)this.tiempoTotalSimulacion;
                 break;
             case 5: 
                 System.out.println("semanas");
 
-                this.tiempoTotalSimulacion = 5 * (int)this.tiempoTotalSimulacion * 210;
+                this.tiempoTotalSimulacion = 5 * (int)this.tiempoTotalSimulacion * 150;
                 break;
             case 6: 
                 System.out.println("meses");
-                this.tiempoTotalSimulacion = 23 * (int)this.tiempoTotalSimulacion * 210;
+                this.tiempoTotalSimulacion = 23 * (int)this.tiempoTotalSimulacion * 150;
                 break;
             case 7: 
                 System.out.println("años");
                 
-                this.tiempoTotalSimulacion = 276 * (int)this.tiempoTotalSimulacion * 210;
+                this.tiempoTotalSimulacion = 200 * (int)this.tiempoTotalSimulacion * 150;
                 break;
         }
             
@@ -248,7 +248,7 @@ public class Simulacion {
         this.estadisticasVista.tiempoPromClienteColaLabel.setText(""+tiempoPromedioCola());        
         
         System.out.println("Tiempo promedio de un cliente en el sistema: "+tiempoPromedioSistema());
-        this.estadisticasVista.tiempoPromClienteSistema.setText(""+tiempoPromedioSistema());        
+        this.estadisticasVista.tiempoPromClienteSistema1.setText(""+tiempoPromedioSistema());        
 
         
         System.out.println("Costo promedio de espera: "+tiempoPromedioCola()*this.costoEspera);
@@ -269,8 +269,8 @@ public class Simulacion {
         }
         
         System.out.println("Uso general "+sumaTotalUsoServer*100/this.tiempoModelo);
-        
-        
+        this.estadisticasVista.usoGeneral.setText(""+sumaTotalUsoServer*100/this.tiempoModelo);        
+
         
         this.estadisticasVista.setSize(800,500);
         mainPanel.removeAll();
