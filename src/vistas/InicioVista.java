@@ -168,6 +168,11 @@ public class InicioVista extends javax.swing.JFrame {
         );
 
         salirBoton.setBackground(new java.awt.Color(255, 102, 102));
+        salirBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirBotonMouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,6 +236,10 @@ public class InicioVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salirBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirBotonMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_salirBotonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +287,6 @@ public class InicioVista extends javax.swing.JFrame {
     public javax.swing.JLabel numeroPart1;
     public javax.swing.JPanel panelParte1;
     public javax.swing.JPanel salirBoton;
-    private javax.swing.JLabel topPart1;
+    public javax.swing.JLabel topPart1;
     // End of variables declaration//GEN-END:variables
 }

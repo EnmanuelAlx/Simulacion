@@ -98,7 +98,7 @@ public class FormularioVista extends javax.swing.JPanel {
         unidadTiempoSelector.setEditable(true);
         unidadTiempoSelector.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         unidadTiempoSelector.setForeground(new java.awt.Color(102, 102, 102));
-        unidadTiempoSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Segundos", "Minutos", "Horas", "Días", "Semanas", "Meses", "Años" }));
+        unidadTiempoSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minutos", "Horas", "Días", "Semanas", "Meses", "Años" }));
         unidadTiempoSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 unidadTiempoSelectorActionPerformed(evt);
@@ -261,6 +261,11 @@ public class FormularioVista extends javax.swing.JPanel {
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 120, 30));
 
         volverBoton.setBackground(new java.awt.Color(255, 102, 102));
+        volverBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volverInicio(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -595,6 +600,11 @@ public class FormularioVista extends javax.swing.JPanel {
        this.tiempoServicioCantValores.setVisible(true);
         
     }//GEN-LAST:event_tiempoServicioCantValoresStateChanged
+
+    private void volverInicio(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverInicio
+        System.exit(0);
+
+    }//GEN-LAST:event_volverInicio
 
     public String obtenerCampo(String linea){
         String campoValor;
