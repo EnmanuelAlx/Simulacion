@@ -45,7 +45,7 @@ public class EstadisticasVista extends javax.swing.JPanel {
         costoServidorTabla = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         porcentajeUtilizacionTabla = new javax.swing.JTable();
-        tiempoPromClienteSistema = new javax.swing.JLabel();
+        usoGeneral = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cantClientesNoEsperaLabel = new javax.swing.JLabel();
@@ -61,6 +61,8 @@ public class EstadisticasVista extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        tiempoPromClienteSistema1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -197,11 +199,11 @@ public class EstadisticasVista extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 270, 90));
 
-        tiempoPromClienteSistema.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        tiempoPromClienteSistema.setForeground(new java.awt.Color(102, 102, 102));
-        tiempoPromClienteSistema.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        tiempoPromClienteSistema.setText("00");
-        add(tiempoPromClienteSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 70, -1));
+        usoGeneral.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        usoGeneral.setForeground(new java.awt.Color(102, 102, 102));
+        usoGeneral.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        usoGeneral.setText("00");
+        add(usoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 70, -1));
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
@@ -318,6 +320,17 @@ public class EstadisticasVista extends javax.swing.JPanel {
         );
 
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setText("Uso general");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+
+        tiempoPromClienteSistema1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        tiempoPromClienteSistema1.setForeground(new java.awt.Color(102, 102, 102));
+        tiempoPromClienteSistema1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tiempoPromClienteSistema1.setText("00");
+        add(tiempoPromClienteSistema1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 70, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarTablaEventos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarTablaEventos
@@ -351,6 +364,7 @@ public class EstadisticasVista extends javax.swing.JPanel {
     public static javax.swing.JLabel costoPromEsperaLabel;
     public static javax.swing.JTable costoServidorTabla;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -373,6 +387,7 @@ public class EstadisticasVista extends javax.swing.JPanel {
     public static javax.swing.JTable porcentajeUtilizacionTabla;
     public static javax.swing.JLabel probEsperaLabel;
     public static javax.swing.JLabel tiempoPromClienteColaLabel;
-    public static javax.swing.JLabel tiempoPromClienteSistema;
+    public static javax.swing.JLabel tiempoPromClienteSistema1;
+    public static javax.swing.JLabel usoGeneral;
     // End of variables declaration//GEN-END:variables
 }
