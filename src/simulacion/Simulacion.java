@@ -112,7 +112,6 @@ public class Simulacion {
             if(!server.isVacio() && server.getSalida()==this.tiempoModelo){
                 Cliente cliente = server.getCliente();
                 this.tiempoPromedioClienteSistema += this.tiempoModelo - cliente.getTiempoLlegadaSistema();
-                System.out.println("this.tiempoPromedioClienteSistema " + this.tiempoPromedioClienteSistema);
                 server.setVacio(true);
                 server.setCliente(null);
                 server.setSalida(99999999);
@@ -170,7 +169,17 @@ public class Simulacion {
                 for (Cliente cliente : colaClientes) {
                     System.out.println("TE: "+cliente.getTiempoEntrada()+ " TS: " +cliente.getTiempoServicio());
                 }
-                this.cantPromedioClientesSistema+=this.cantClientesSistema*this.tiempoModelo;
+                int cantPersonasSistema= 0;
+                for(Servidor server:servidores){
+                   if(!server.isVacio()){
+                       cantPersonasSistema++;
+                   }
+                }
+                cantPersonasSistema+=this.colaClientes.size();
+                System.out.println("Cant personas en el sistema "+cantPersonasSistema);
+                if(this.cantClientesSistema>0){
+                    this.cantPromedioClientesSistema+=cantPersonasSistema*this.tiempoModelo;
+                }
                 if(this.colaClientes.size()>0){
                     this.cantPromedioClientesCola+=this.cantClientesSistema * this.tiempoModelo;
                 }
@@ -259,6 +268,8 @@ public class Simulacion {
             i++;
         }
         
+        System.out.println("Uso general "+sumaTotalUsoServer*100/this.tiempoModelo);
+        
         
         
         this.estadisticasVista.setSize(800,500);
@@ -314,10 +325,6 @@ public class Simulacion {
             if(server.isVacio() && this.colaClientes.isEmpty()){
                 server.setVacio(false);
                 this.TS = generarTS();
-                System.out.println("///////////////////////////////////");
-                System.out.println("TS = "+this.TS );
-                System.out.println("///////////////////////////////////");
-
                 incrementDT(this.TS);
                 Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, -1);
                 server.setCliente(cliente);
@@ -453,7 +460,6 @@ public class Simulacion {
         for (Iterator<Tiempo> i = tiempos.iterator(); i.hasNext();) {
             Tiempo item = i.next();
             if(RandomNum>=item.getMin() && RandomNum<=item.getMax()){
-                System.out.println("Este es el random num = "+RandomNum);
                 return item.getValor();
             }
         }
