@@ -314,6 +314,10 @@ public class Simulacion {
             if(server.isVacio() && this.colaClientes.isEmpty()){
                 server.setVacio(false);
                 this.TS = generarTS();
+                System.out.println("///////////////////////////////////");
+                System.out.println("TS = "+this.TS );
+                System.out.println("///////////////////////////////////");
+
                 incrementDT(this.TS);
                 Cliente cliente = new Cliente(this.TE, this.TS, this.tiempoModelo, -1);
                 server.setCliente(cliente);
@@ -375,7 +379,7 @@ public class Simulacion {
             for (Servidor server : servidores) {
                 if(server.isVacio()){
                     server.setVacio(false);
-                    this.TS = cliente.getTiempoServicio();
+                    this.TS = generarTS();
                     incrementDT(this.TS);
                     server.setCliente(cliente);
                     server.setSalida(this.DT);
@@ -445,9 +449,11 @@ public class Simulacion {
     }
     
     private int getTiempo(int RandomNum, ArrayList tiempos){
+        
         for (Iterator<Tiempo> i = tiempos.iterator(); i.hasNext();) {
             Tiempo item = i.next();
             if(RandomNum>=item.getMin() && RandomNum<=item.getMax()){
+                System.out.println("Este es el random num = "+RandomNum);
                 return item.getValor();
             }
         }
